@@ -14,7 +14,7 @@ void PhoneBook::addContact()
 	while (true) 
 	{
 		std::cout << "Enter first name: ";
-		std::getline(std::cin >> std::ws, firstName);
+		std::getline(std::cin, firstName);
 		if (!firstName.empty())
 		{
 			_contacts[index].setFirstName(firstName);
@@ -24,7 +24,7 @@ void PhoneBook::addContact()
 	while (true) 
 	{
 		std::cout << "Enter last name: ";
-		std::getline(std::cin >> std::ws, lastName);
+		std::getline(std::cin, lastName);
 		if (!lastName.empty())
 		{
 			_contacts[index].setLastName(lastName);
@@ -34,7 +34,7 @@ void PhoneBook::addContact()
 	while (true) 
 	{
 		std::cout << "Enter nickname: "; 
-		std::getline(std::cin >> std::ws, nickname);
+		std::getline(std::cin, nickname);
 		if (!nickname.empty())
 		{
 			_contacts[index].setNickname(nickname);
@@ -44,7 +44,7 @@ void PhoneBook::addContact()
 	while (true) 
 	{
 		std::cout << "Enter phone number: ";
-		std::getline(std::cin >> std::ws, phoneNumber);
+		std::getline(std::cin, phoneNumber);
 		if (!phoneNumber.empty())
 		{
 			_contacts[index].setPhoneNumber(phoneNumber);
@@ -54,7 +54,7 @@ void PhoneBook::addContact()
 	while (true) 
 	{
 		std::cout << "Enter darkest secret: ";
-		std::getline(std::cin >> std::ws, darkestSecret);
+		std::getline(std::cin, darkestSecret);
 		if (!darkestSecret.empty())
 		{
 			_contacts[index].setDarkestSecret(darkestSecret);
