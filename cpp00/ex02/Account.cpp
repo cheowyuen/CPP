@@ -9,8 +9,8 @@ int	Account::_totalNbWithdrawals = 0;
 void	Account::_displayTimestamp( void )
 {
 	time_t	timestamp;
-	tm datetime;
-	char output[20];
+	tm 		datetime;
+	char 	output[20];
 
 	time(&timestamp);
 	datetime = *localtime(&timestamp);

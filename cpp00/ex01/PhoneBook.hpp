@@ -9,11 +9,14 @@ class PhoneBook
 {
 	private:
 		Contact	_contacts[8];
+		int		_count;
 
 	public:
+		PhoneBook();
 		void addContact();
 		void searchContacts() const;
 		void displayContact(int index) const;
+		void displayFull(int index) const;
 };
 
 #endif

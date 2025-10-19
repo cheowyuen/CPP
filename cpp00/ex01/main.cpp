@@ -1,10 +1,8 @@
 #include "PhoneBook.hpp"
-#include <string>
-#include <iostream>
 
 int main(void)
 {
-	PhoneBook	book;
+	PhoneBook	phonebook;
 	std::string cmd;
 
 	while (true)
@@ -13,11 +11,11 @@ int main(void)
 		std::getline(std::cin, cmd);
 		if (cmd == "ADD")
 		{
-			book.addContact();
+			phonebook.addContact();
 		}
 		else if (cmd == "SEARCH")
 		{
-			book.searchContacts();
+			phonebook.searchContacts();
 		}
 		else if (cmd == "EXIT")
 		{
