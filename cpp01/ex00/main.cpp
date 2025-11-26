@@ -1,12 +1,10 @@
 #include "Zombie.hpp"
 
-int main(void)
+int main()
 {
-	Zombie* z;
-
-	z = newZombie("Dr Edgar");
+	Zombie* z = newZombie("Dr Edgar");
 	z->announce();
-	delete (z); 
+	delete z; 
 	randomChump("Bucket Head");
-	return (0);
+	return 0;
 }
