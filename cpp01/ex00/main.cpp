@@ -2,7 +2,7 @@
 
 int main()
 {
-	Zombie* z = newZombie("Dr Edgar");
+	Zombie *z = newZombie("Dr Edgar");
 	z->announce();
 	delete z; 
 	randomChump("Bucket Head");

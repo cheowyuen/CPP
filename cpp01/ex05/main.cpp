@@ -1,0 +1,16 @@
+#include "Harl.hpp"
+
+int main()
+{
+	Harl h;
+
+	h.complain("DEBUG");
+	h.complain("INFO");
+	h.complain("WARNING");
+	h.complain("ERROR");
+	h.complain("");
+	h.complain("TEST");
+	h.complain("ERROR");
+
+	return 0;
+}

@@ -1,6 +1,7 @@
 #include "Zombie.hpp"
+#include <iostream>
 
-Zombie::Zombie(const std::string& _name) : name(_name) {}
+Zombie::Zombie(const std::string &_name) : name(_name) {}
 
 Zombie::~Zombie()
 {
