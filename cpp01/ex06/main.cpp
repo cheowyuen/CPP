@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 			h.complain("DEBUG");
 			std::cout << "\n";
 		case 1:
-			std::cout << "[ DEBUG ]\n";
+			std::cout << "[ INFO ]\n";
 			h.complain("INFO");
 			std::cout << "\n";
 		case 2:
