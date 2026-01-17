@@ -9,5 +9,9 @@ int main() {
 		clapTrap.attack("Wobble");
 	}
 	clapTrap.beRepaired(1);
+	clapTrap.takeDamage(10);
+	clapTrap.attack("Wobble");
+	clapTrap.beRepaired(1);
+	clapTrap.takeDamage(1);
 	return 0;
 }
