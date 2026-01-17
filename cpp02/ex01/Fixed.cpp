@@ -5,14 +5,12 @@ Fixed::Fixed() : _value(0) {
 	std::cout << "Default constructor called\n";
 }
 
-Fixed::Fixed(const int num) {
+Fixed::Fixed(const int num) : _value(num << _bits) {
 	std::cout << "Int constructor called\n";
-	_value = num << _bits;
 }
 
-Fixed::Fixed(const float num) {
+Fixed::Fixed(const float num) : _value(roundf(num * (1 << _bits))) {
 	std::cout << "Float constructor called\n";
-	_value = roundf(num * (1 << _bits));
 }
 
 Fixed::Fixed(const Fixed &other) {
