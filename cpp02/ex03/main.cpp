@@ -5,12 +5,13 @@ int main(void) {
 	Point const a = {0,0};
 	Point const b = {3,3};
 	Point const c = {6,0};
-	Point const point = {3,1};
+	Point const point1 = {3,1};
+	Point const point2 = {3,0};
+	Point const point3 = {3,4};
 
-	if (bsp(a, b, c, point))
-		std::cout << "Point is inside triangle\n";
-	else
-		std::cout << "Point is outside triangle\n";
+	std::cout << "point1: " << bsp(a, b, c, point1) << std::endl;
+	std::cout << "point2: " << bsp(a, b, c, point2) << std::endl;
+	std::cout << "point3: " << bsp(a, b, c, point3) << std::endl;
 	
 	return 0; 
 }
