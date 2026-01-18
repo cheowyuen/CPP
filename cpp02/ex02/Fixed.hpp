@@ -14,7 +14,6 @@ class Fixed {
 		Fixed(const float num);
 		Fixed(const Fixed &other);
 		Fixed &operator=(const Fixed &other);
-		friend std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
 		~Fixed();
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
@@ -40,5 +39,7 @@ class Fixed {
 		static Fixed &max(Fixed &a, Fixed &b);
 		static const Fixed &max(const Fixed &a, const Fixed &b);
 };
+
+std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
 
 #endif

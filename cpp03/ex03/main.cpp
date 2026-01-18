@@ -2,14 +2,13 @@
 #include <iostream>
 
 int main() {
-	DiamondTrap diamond("Diamond");
-	diamond.attack("Enemy");
-	diamond.beRepaired(10);
-	diamond.takeDamage(5);
+	DiamondTrap diamond("Nibble");
+	diamond.attack("Wobble");
+	diamond.beRepaired(1);
+	diamond.takeDamage(101);
 	diamond.whoAmI();
-	for (int i = 0; i < 60; i++) {
-		 diamond.attack("Enemy");
-	}
-	diamond.beRepaired(5);
+	diamond.attack(("Wobble"));
+	diamond.beRepaired(1);
+	diamond.takeDamage(1);
 	return 0;
 }
