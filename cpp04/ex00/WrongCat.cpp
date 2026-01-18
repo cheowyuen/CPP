@@ -3,21 +3,21 @@
 
 WrongCat::WrongCat() {
 	type = "WrongCat";
-	std::cout << "Wrong Cat is created\n";
+	std::cout << "Wrong Cat constructed\n";
 }
 
-WrongCat::~WrongCat() {
-	std::cout << "Wrong Cat is destroyed\n";
-}
-
-WrongCat::WrongCat(const WrongCat &other) {
-	type = other.type;
+WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other) {
+	std::cout << "Wrong Cat copy constructed\n";
 }
 
 WrongCat &WrongCat::operator=(const WrongCat &other) {
 	if (this != &other)
-		type = other.type;
+		WrongAnimal::operator=(other);
 	return *this;
+}
+
+WrongCat::~WrongCat() {
+	std::cout << "Wrong Cat destructed\n";
 }
 
 void WrongCat::makeSound() const {

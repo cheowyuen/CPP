@@ -2,14 +2,12 @@
 #include <iostream>
 
 WrongAnimal::WrongAnimal() : type("") {
-	std::cout << "Wrong Animal is created\n";
+	std::cout << "Wrong Animal constructed\n";
 }
 
-WrongAnimal::~WrongAnimal() {
-	std::cout << "Wrong Animal is destroyed\n";
+WrongAnimal::WrongAnimal(const WrongAnimal &other) : type(other.type) {
+	std::cout << "Wrong Animal copy constructed\n";
 }
-
-WrongAnimal::WrongAnimal(const WrongAnimal &other) : type(other.type) {}
 
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
 	if (this != &other)
@@ -17,7 +15,11 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
 	return *this;
 }
 
-std::string WrongAnimal::getType() const {
+WrongAnimal::~WrongAnimal() {
+	std::cout << "Wrong Animal destructed\n";
+}
+
+const std::string &WrongAnimal::getType() const {
 	return type;
 }
 

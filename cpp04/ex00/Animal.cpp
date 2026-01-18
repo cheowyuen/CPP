@@ -2,14 +2,12 @@
 #include <iostream>
 
 Animal::Animal() : type("") {
-	std::cout << "Animal is created\n";
+	std::cout << "Animal constructed\n";
 }
 
-Animal::~Animal() {
-	std::cout << "Animal is destroyed\n";
+Animal::Animal(const Animal &other) : type(other.type) {
+	std::cout << "Animal copy constructed\n";
 }
-
-Animal::Animal(const Animal &other) : type(other.type) {}
 
 Animal &Animal::operator=(const Animal &other) {
 	if (this != &other)
@@ -17,7 +15,11 @@ Animal &Animal::operator=(const Animal &other) {
 	return *this;
 }
 
-std::string Animal::getType() const {
+Animal::~Animal() {
+	std::cout << "Animal destructed\n";
+}
+
+const std::string &Animal::getType() const {
 	return type;
 }
 

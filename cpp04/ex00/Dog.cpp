@@ -3,19 +3,21 @@
 
 Dog::Dog() {
 	type = "Dog";
-	std::cout << "Dog is created\n";
+	std::cout << "Dog constructed\n";
 }
 
-Dog::~Dog() {
-	std::cout << "Dog is destroyed\n";
+Dog::Dog(const Dog &other) : Animal(other) {
+	std::cout << "Dog copy constructed\n";
 }
-
-Dog::Dog(const Dog &other) : Animal(other) {}
 
 Dog &Dog::operator=(const Dog &other) {
 	if (this != &other)
-		type = other.type;
+		Animal::operator=(other);
 	return *this;
+}
+
+Dog::~Dog() {
+	std::cout << "Dog destructed\n";
 }
 
 void Dog::makeSound() const {

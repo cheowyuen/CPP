@@ -3,19 +3,21 @@
 
 Cat::Cat() {
 	type = "Cat";
-	std::cout << "Cat is created\n";
+	std::cout << "Cat constructed\n";
 }
 
-Cat::~Cat() {
-	std::cout << "Cat is destroyed\n";
+Cat::Cat(const Cat &other) : Animal(other) {
+	std::cout << "Cat copy constructed\n";
 }
-
-Cat::Cat(const Cat &other) : Animal(other) {}
 
 Cat &Cat::operator=(const Cat &other) {
 	if (this != &other)
-		type = other.type;
+		Animal::operator=(other);
 	return *this;
+}
+
+Cat::~Cat() {
+	std::cout << "Cat destructed\n";
 }
 
 void Cat::makeSound() const {
