@@ -10,19 +10,18 @@ int main(int argc, char **argv)
 	}
 
 	std::string 	filename(argv[1]);
-	std::string 	s1(argv[2]);
-	std::string 	s2(argv[3]);
-	std::ifstream 	inFile(filename);
-	std::ofstream 	outFile(filename + ".replace");
-
+	std::string 	s1(argv[2]);	
 	if (s1.empty()) {
 		std::cout << "String to replace cannot be empty\n";
 		return 1;
 	}
+	std::string 	s2(argv[3]);
+	std::ifstream 	inFile(filename);
 	if (!inFile.is_open()) {
 		std::cout << "Error opening file " + filename + "\n";
 		return 1;
 	}
+	std::ofstream 	outFile(filename + ".replace");
 	if (!outFile.is_open()) {
 		std::cout << "Error opening file " + filename + ".replace\n";
 		return 1;
