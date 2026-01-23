@@ -1,6 +1,5 @@
 #include "Harl.hpp"
 #include <iostream>
-#include <map>
 
 void Harl::debug(void) {
 	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup" 
@@ -22,9 +21,13 @@ void Harl::error(void) {
 }
 
 void Harl::complain(std::string level) {
-	std::map<std::string, void (Harl::*)()> functions = {{"DEBUG", &Harl::debug}
-		, {"INFO", &Harl::info}, {"WARNING", &Harl::warning}, {"ERROR", &Harl::error}};
-	std::map<std::string, void (Harl::*)()>::iterator it = functions.find(level);
-	if (it != functions.end())
-		(this->*(it->second))();
+	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void (Harl::* functions[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	for (int i = 0; i < 4; i++) {
+		if (levels[i] == level) 
+		{
+			(this->*functions[i])();
+			return;
+		}
+	}
 }
