@@ -1,5 +1,4 @@
 #include "Point.hpp"
-#include <iostream>
 
 int main(void) { 
 	Point const a = {0,0};

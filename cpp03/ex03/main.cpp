@@ -7,6 +7,8 @@ int main() {
 	diamond.beRepaired(1);
 	diamond.takeDamage(101);
 	diamond.whoAmI();
+	diamond.guardGate();
+	diamond.highFivesGuys();
 	diamond.attack(("Wobble"));
 	diamond.beRepaired(1);
 	diamond.takeDamage(1);
