@@ -6,7 +6,7 @@ Brain::Brain() {
 }
 
 Brain::Brain(const Brain &other) {
-	for(int i = 1; i < 100; i++) {
+	for(int i = 0; i < 100; i++) {
 		ideas[i] = other.ideas[i];
 	}
 	std::cout << "Brain copy constructed\n";
@@ -14,7 +14,7 @@ Brain::Brain(const Brain &other) {
 
 Brain &Brain::operator=(const Brain &other) {
 	if (this != &other) {
-		for(int i = 1; i < 100; i++) {
+		for(int i = 0; i < 100; i++) {
 			ideas[i] = other.ideas[i];
 		}
 	}
