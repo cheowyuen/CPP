@@ -1,38 +1,29 @@
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 
 int main() {
-	Bureaucrat Default;
+	Form Default;
+	Form A("A", 1, 1);
+	Form B("B", 75, 75);
+	try {
+		Form C("C", 0, 1);
+	} 
+	catch (std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+	try {
+		Form D("D", 1, 151);
+	} 
+	catch (std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+	std::cout << A << std::endl;
+	std::cout << B << std::endl;
+
 	Bureaucrat Cantik("Cantik", 1);
 	Bureaucrat Manis("Manis", 150);
-	try {
-		Bureaucrat Ayu("Ayu", 0);
-	} 
-	catch (std::exception &e) {
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
-	try {
-		Bureaucrat Molek("Molek", 151);
-	} 
-	catch (std::exception &e) {
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
-	std::cout << Cantik << std::endl;
-	std::cout << Manis << std::endl;
-
-	try {
-		Cantik.increment();
-	} 
-	catch (std::exception &e) {
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
-	try {
-		Manis.decrement();
-	} 
-	catch (std::exception &e) {
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
-	Cantik.decrement();
-	Manis.increment();
-	std::cout << Cantik << std::endl;
-	std::cout << Manis << std::endl;
+	Manis.signForm(A);
+	std::cout << A << std::endl;
+	Cantik.signForm(B);
+	std::cout << B << std::endl;
 }

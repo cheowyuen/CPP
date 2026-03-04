@@ -44,6 +44,6 @@ const char *Form::GradeTooLowException::what() const throw() {
 		
 std::ostream &operator<<(std::ostream &os, const Form &form) {
 	os << form.getName() << ", is signed " << form.getIsSigned() << ", sign grade " << form.getSignGrade() 
-		<< ", exec grade " << form.getExecGrade() << std::endl;
+		<< ", exec grade " << form.getExecGrade();
 	return os;
 }
