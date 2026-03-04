@@ -28,7 +28,7 @@ class Bureaucrat {
 			public:
 				virtual const char *what() const throw();
 		};
-		void signForm(Form &form, const Bureaucrat &bureaucrat); 
+		void signForm(Form &form); 
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);

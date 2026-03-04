@@ -2,28 +2,27 @@
 #include "Bureaucrat.hpp"
 
 int main() {
-	Form Default;
-	Form A("A", 1, 1);
-	Form B("B", 75, 75);
+	Form a("A", 1, 1);
+	Form b("B", 75, 75);
 	try {
-		Form C("C", 0, 1);
+		Form c("C", 0, 1);
 	} 
 	catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
-		Form D("D", 1, 151);
+		Form d("D", 1, 151);
 	} 
 	catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
-	std::cout << A << std::endl;
-	std::cout << B << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
 
-	Bureaucrat Cantik("Cantik", 1);
-	Bureaucrat Manis("Manis", 150);
-	Manis.signForm(A);
-	std::cout << A << std::endl;
-	Cantik.signForm(B);
-	std::cout << B << std::endl;
+	Bureaucrat cantik("Cantik", 1);
+	Bureaucrat manis("Manis", 150);
+	manis.signForm(a);
+	std::cout << a << std::endl;
+	cantik.signForm(b);
+	std::cout << b << std::endl;
 }

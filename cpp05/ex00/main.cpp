@@ -1,39 +1,39 @@
 #include "Bureaucrat.hpp"
 
 int main() {
-	Bureaucrat Default;
-	Bureaucrat Cantik("Cantik", 1);
-	Bureaucrat Manis("Manis", 150);
+	Bureaucrat birokrat;
+	Bureaucrat cantik("Cantik", 1);
+	Bureaucrat manis("Manis", 150);
 	try {
-		Bureaucrat Ayu("Ayu", 0);
+		Bureaucrat ayu("Ayu", 0);
 	} 
 	catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
-		Bureaucrat Molek("Molek", 151);
+		Bureaucrat molek("Molek", 151);
 	} 
 	catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
-	std::cout << Default << std::endl;
-	std::cout << Cantik << std::endl;
-	std::cout << Manis << std::endl;
+	std::cout << birokrat << std::endl;
+	std::cout << cantik << std::endl;
+	std::cout << manis << std::endl;
 
 	try {
-		Cantik.increment();
+		cantik.increment();
 	} 
 	catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
-		Manis.decrement();
+		manis.decrement();
 	} 
 	catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
-	Cantik.decrement();
-	Manis.increment();
-	std::cout << Cantik << std::endl;
-	std::cout << Manis << std::endl;
+	cantik.decrement();
+	manis.increment();
+	std::cout << cantik << std::endl;
+	std::cout << manis << std::endl;
 }

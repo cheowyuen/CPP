@@ -15,7 +15,7 @@ class Form {
 
 	public:
 		Form();
-		Form(std::string name, int signGrade, int execGrade);
+		Form(const std::string &name, int signGrade, int execGrade);
 		~Form() = default;
 		Form(const Form &other) = default;
 		Form &operator=(const Form &other) = delete;
