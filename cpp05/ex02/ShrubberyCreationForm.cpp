@@ -2,10 +2,11 @@
 #include <fstream>
 #include <iostream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : _target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : 
+	AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-void ShrubberyCreationForm::createFile() {
-	std::ofstream outFile(_target);
+void ShrubberyCreationForm::executeAction() const {
+	std::ofstream outFile(_target + "_shrubbery");
 	if (!outFile.is_open()) {
 		std::cout << "Error opening file " + _target + "\n";
 		return;
@@ -23,5 +24,4 @@ void ShrubberyCreationForm::createFile() {
  ______|_____|______|______
  credit: Laura Brown
 	)";
-	return;
 }

@@ -13,7 +13,7 @@ class RobotomyRequestForm : public AForm  {
 		~RobotomyRequestForm() = default;
 		RobotomyRequestForm(const RobotomyRequestForm &other) = default;
 		RobotomyRequestForm &operator=(const RobotomyRequestForm &other) = delete; 
-		void robotomize();
+		void executeAction() const;
 };
 
 #endif

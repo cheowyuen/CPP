@@ -2,9 +2,10 @@
 #include <iostream>
 #include <random>
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : _target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :
+	AForm("RobotomyRequestForm", 72, 45), _target(target) {}
 
-void RobotomyRequestForm::robotomize() {
+void RobotomyRequestForm::executeAction() const {
 	std::cout << "Drilling noises\n";
 	std::random_device rd;
 	std::mt19937 gen(rd());

@@ -13,7 +13,7 @@ class PresidentialPardonForm : public AForm  {
 		~PresidentialPardonForm() = default;
 		PresidentialPardonForm(const PresidentialPardonForm &other) = default;
 		PresidentialPardonForm &operator=(const PresidentialPardonForm &other) = delete; 
-		void pardon();
+		void executeAction() const;
 };
 
 #endif

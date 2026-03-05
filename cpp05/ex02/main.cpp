@@ -4,14 +4,43 @@
 #include "Bureaucrat.hpp"
 
 int main() {
+	Bureaucrat tomNook("TomNook", 6);
+	Bureaucrat wisp("Wisp", 26);
+	Bureaucrat daisyMae("DaisyMae", 46);
+	Bureaucrat timmy("Timmy", 73);
+	Bureaucrat tommy("Tommy", 138);
+	Bureaucrat isabelle("Isabelle", 146);
+	
 	ShrubberyCreationForm shrubForm("Trees");
-	shrubForm.createFile();
+	RobotomyRequestForm robotomyForm("Gulliver");
+	PresidentialPardonForm pardonForm("Redd");
 
-	RobotomyRequestForm robotomyForm("Tom Nook");
-	robotomyForm.robotomize();
+	std::cout << "===== Shrubbery Creation =====\n";
+	tomNook.executeForm(shrubForm);
+	isabelle.signForm(shrubForm);
+	isabelle.increment();
+	isabelle.signForm(shrubForm);
+	tommy.executeForm(shrubForm);
+	tommy.increment();
+	tommy.executeForm(shrubForm);
 
-	PresidentialPardonForm pardonForm("Isabelle");
-	pardonForm.pardon();
+	std::cout << "\n===== Robotomy Request =====\n";
+	tomNook.executeForm(robotomyForm);
+	timmy.signForm(robotomyForm);
+	timmy.increment();
+	timmy.signForm(robotomyForm);
+	daisyMae.executeForm(robotomyForm);
+	daisyMae.increment();
+	daisyMae.executeForm(robotomyForm);
 
+	std::cout << "\n===== Presidential Pardon =====\n";
+	tomNook.executeForm(pardonForm);
+	wisp.signForm(pardonForm);
+	wisp.increment();
+	wisp.signForm(pardonForm);
+	tomNook.executeForm(pardonForm);
+	tomNook.increment();
+	tomNook.executeForm(pardonForm);
+	
 	return 0;
 }
