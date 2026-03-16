@@ -1,22 +1,13 @@
-#include "iter.hpp"
+#include "Array.hpp"
 #include <iostream>
 
-template <typename T>
-void multiplyTen(T& value) {
-	value *= 10;
-}
-
-template <typename T>
-void printInt(const T& value) {
-	std::cout << value << "\n";
-}
-
 int main( void ) {
-	int intArr[] = {1, 2, 3};
-	iter(intArr, 3, multiplyTen<int>);
-	for (int i = 0; i < 3; i++)
-		std::cout << intArr[i] << "\n";
-	const int constArr[] = {4, 5, 6};
-	iter(constArr, 3, printInt<int>);
+	Array<int> arrayA(5);
+	for (int i = 0; i < 5; i++)
+		arrayA[i] = i;
+	Array<int> arrayB(arrayA);
+	for (int i = 0; i < 5; i++) {
+		std::cout << "arrayB[" << i << "]: " << arrayB[i] << "\n";
+	}
 	return 0;
 }

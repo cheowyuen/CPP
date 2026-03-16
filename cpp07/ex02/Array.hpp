@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "Array.tpp"
 
 template <typename T>
 class Array {
@@ -23,5 +22,7 @@ class Array {
 
 		unsigned int size() const;
 };
+
+#include "Array.tpp"
 
 #endif
