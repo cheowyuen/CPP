@@ -2,14 +2,9 @@
 #define EASYFIND_HPP
 
 template <typename T>
-class easyfind {
-	public:
-		easyfind();
-		easyfind(T _type, int _value);
-		easyfind(const easyfind& other);
-		easyfind& operator=(const easyfind& other);
-		~easyfind();
-};
+typename T::iterator easyfind(T& container, int value);
+template <typename T>
+typename T::const_iterator easyfind(const T& container, int value);
 
 #include "easyfind.tpp"
 
