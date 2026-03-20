@@ -1,21 +1,34 @@
 #include "easyfind.hpp"
 #include <iostream>
 #include <vector>
+#include <list>
+#include <string>
+#include <iterator>
 
-int main( void ) {
-	std::vector<int> v;
-	v.push_back(1);
-	v.push_back(2);
-	v.push_back(3);
+int main() {
+	{
+		std::vector<int> c{1, 2, 3};
+		std::vector<int>::iterator it = easyfind(c, 2);
+		int index = it - c.begin();
+		std::cout << "Value found at index " << index << ": " << *it << "\n";
+		try {
+			easyfind(c, 10);
+		} catch (const std::exception& e) {
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
+	}
 
-	auto i = easyfind(v, 2);
-	std::cout << *i << "\n";
-	try {
-		easyfind(v, 10);
+	{
+		const std::list<int> c{4, 5, 6};
+		std::list<int>::const_iterator it = easyfind(c, 4);
+		int index = std::distance(c.begin(), it);
+		std::cout << "Value found at index " << index << ": " << *it << "\n";
+		try {
+			easyfind(c, 1);
+		} catch (const std::exception& e) {
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
 	}
-	catch (std::exception& e) {
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
-	return 0;
+
+    return 0;
 }
- 
