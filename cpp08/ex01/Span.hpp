@@ -9,7 +9,7 @@ class Span {
 		unsigned int _n;
 
 	public:
-		Span() = default;
+		Span();
 		Span(unsigned int n);
 		~Span() = default;
 		Span(const Span& other) = default;
@@ -17,6 +17,9 @@ class Span {
 		void addNumber(int num);
 		int shortestSpan();
 		int longestSpan();
+
+		template <typename T>
+		void addMultiple(T& num);
 };
 
 #endif
