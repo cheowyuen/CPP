@@ -32,4 +32,3 @@ int Span::shortestSpan() {
 	}
 	return (shortest);
 }
-

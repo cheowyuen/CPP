@@ -18,8 +18,11 @@ class Span {
 		int shortestSpan();
 		int longestSpan();
 
-		template <typename T>
-		void addMultiple(T& num);
+		template <typename Iterator>
+		void addMultiple(Iterator begin, Iterator end) {
+			for (Iterator it = begin; it != end; ++it)
+				addNumber(*it);
+		}
 };
 
 #endif
