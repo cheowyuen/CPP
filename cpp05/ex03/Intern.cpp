@@ -4,27 +4,28 @@
 #include "PresidentialPardonForm.hpp"
 #include <iostream>
 
-AForm* Intern::makeForm(std::string name, std::string target) const {
+AForm* Intern::makeForm(const std::string& name, const std::string& target) const {
 	std::string names[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
-	AForm* (*creators[])(std::string) = {createShrubbery, createRobotomy, createPresidential};
+	AForm* (*creators[])(const std::string&) = {createShrubbery, createRobotomy, createPresidential};
 	for (int i = 0; i < 3; i++) {
 		if (name == names[i]) {
-			std::cout << "Intern creates " << name << "\n";
-			return creators[i](target);
+			AForm* form = creators[i](target);
+			std::cout << "Intern creates " << form->getName() << std::endl;
+			return form;
 		}
 	}
-	std::cout << "Form name does not exist\n";
+	std::cout << "Form name does not exist" << std::endl;
 	return nullptr;
 }
 
-AForm* Intern::createShrubbery(std::string target) {
+AForm* Intern::createShrubbery(const std::string& target) {
 	return new ShrubberyCreationForm(target);
 }
 
-AForm* Intern::createRobotomy(std::string target) {
+AForm* Intern::createRobotomy(const std::string& target) {
 	return new RobotomyRequestForm(target);
 }
 
-AForm* Intern::createPresidential(std::string target) {
+AForm* Intern::createPresidential(const std::string& target) {
 	return new PresidentialPardonForm(target);
 }

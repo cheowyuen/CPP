@@ -9,10 +9,11 @@ class RobotomyRequestForm : public AForm  {
 		const std::string _target;
 
 	public:
-		RobotomyRequestForm(const std::string &target);
+		RobotomyRequestForm();
+		RobotomyRequestForm(const std::string& target);
 		~RobotomyRequestForm() = default;
-		RobotomyRequestForm(const RobotomyRequestForm &other) = default;
-		RobotomyRequestForm &operator=(const RobotomyRequestForm &other) = delete; 
+		RobotomyRequestForm(const RobotomyRequestForm& other) = default;
+		RobotomyRequestForm& operator=(const RobotomyRequestForm& other) = delete; 
 		void executeAction() const;
 };
 

@@ -9,6 +9,7 @@ class ShrubberyCreationForm : public AForm {
 		const std::string _target;
 
 	public:
+		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string& target);
 		~ShrubberyCreationForm() = default;
 		ShrubberyCreationForm(const ShrubberyCreationForm& other) = default;
