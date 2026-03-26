@@ -7,13 +7,13 @@ int main() {
 	try {
 		Bureaucrat ayu("Ayu", 0);
 	} 
-	catch (std::exception &e) {
+	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
 		Bureaucrat molek("Molek", 151);
 	} 
-	catch (std::exception &e) {
+	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << birokrat << std::endl;
@@ -23,13 +23,13 @@ int main() {
 	try {
 		cantik.increment();
 	} 
-	catch (std::exception &e) {
+	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
 		manis.decrement();
 	} 
-	catch (std::exception &e) {
+	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	cantik.decrement();
