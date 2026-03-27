@@ -21,11 +21,11 @@ class Bureaucrat {
 		void increment();
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
 		};
 };
 

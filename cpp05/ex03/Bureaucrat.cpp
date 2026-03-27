@@ -2,24 +2,14 @@
 
 Bureaucrat::Bureaucrat() : Bureaucrat("Bureaucrat", 150) {}
 		
-Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade) {
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade) {
 	if (grade < 1)
 		throw GradeTooHighException();
 	else if (grade > 150)
 		throw GradeTooLowException();
 }
 
-Bureaucrat::~Bureaucrat() {}
-		
-Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other._name), _grade(other._grade) {}
-		
-Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-	if (this != &other)
-		_grade = other._grade;
-	return *this;
-}
-		
-const std::string &Bureaucrat::getName() const {
+const std::string& Bureaucrat::getName() const {
 	return _name;
 }
 		
@@ -41,35 +31,35 @@ void Bureaucrat::increment() {
 		_grade--;
 }
 		
-const char *Bureaucrat::GradeTooHighException::what() const throw() {
-	return "Grade too high";
+const char* Bureaucrat::GradeTooHighException::what() const noexcept {
+	return "grade too high";
 }
 		
-const char *Bureaucrat::GradeTooLowException::what() const throw() {
-	return "Grade too low";
+const char* Bureaucrat::GradeTooLowException::what() const noexcept {
+	return "grade too low";
 }
 		
-std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
 	return os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
 }
 
-void Bureaucrat::signForm(AForm &form) {
+void Bureaucrat::signForm(AForm& form) {
 	try {
 		form.beSigned(*this);
 		std::cout << getName() << " signed " << form.getName() << "\n";
 	}
-	catch(std::exception &e) {
+	catch(std::exception& e) {
 		std::cout << getName() << " couldn't sign " << form.getName() << " because " 
 			<< e.what() << "\n";
 	}
 }
 
-void Bureaucrat::executeForm(AForm const & form) const {
+void Bureaucrat::executeForm(AForm const& form) const {
 	try {
 		form.execute(*this);
 		std::cout << getName() << " executed " << form.getName() << "\n";
 	}
-	catch(std::exception &e) {
+	catch(std::exception& e) {
 		std::cout << getName() << " couldn't execute " << form.getName() << " because " 
 			<< e.what() << "\n";
 	}

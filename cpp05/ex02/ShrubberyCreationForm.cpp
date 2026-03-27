@@ -11,7 +11,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
 void ShrubberyCreationForm::executeAction() const {
 	std::ofstream outFile(_target + "_shrubbery");
 	if (!outFile.is_open()) {
-		std::cout << "Error opening file " + _target + "_shrubbery" << std::endl;
+		std::cout << "Error opening file " + _target + "_shrubbery\n";
 		return;
 	}
 	outFile << R"(

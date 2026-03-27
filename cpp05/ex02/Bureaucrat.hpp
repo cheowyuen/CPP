@@ -22,11 +22,11 @@ class Bureaucrat {
 		void increment();
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
 		};
 		void signForm(AForm& form); 
 		void executeForm(AForm const& form) const;

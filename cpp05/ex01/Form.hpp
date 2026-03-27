@@ -26,11 +26,15 @@ class Form {
 		void beSigned(const Bureaucrat& bureaucrat);
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
+		};
+		class FormSigned : public std::exception {
+			public:
+				const char* what() const noexcept;
 		};
 };
 

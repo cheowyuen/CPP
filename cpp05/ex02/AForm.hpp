@@ -28,15 +28,19 @@ class AForm {
 		virtual void executeAction() const = 0;
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
+		};
+		class FormSigned : public std::exception {
+			public:
+				const char* what() const noexcept;
 		};
 		class FormNotSigned : public std::exception {
 			public:
-				virtual const char* what() const noexcept;
+				const char* what() const noexcept;
 		};
 };
 

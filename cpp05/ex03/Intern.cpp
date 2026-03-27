@@ -10,11 +10,11 @@ AForm* Intern::makeForm(const std::string& name, const std::string& target) cons
 	for (int i = 0; i < 3; i++) {
 		if (name == names[i]) {
 			AForm* form = creators[i](target);
-			std::cout << "Intern creates " << form->getName() << std::endl;
+			std::cout << "Intern creates " << form->getName() << "\n";
 			return form;
 		}
 	}
-	std::cout << "Form name does not exist" << std::endl;
+	std::cout << "Form name does not exist\n";
 	return nullptr;
 }
 

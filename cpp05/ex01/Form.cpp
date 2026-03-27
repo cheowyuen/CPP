@@ -28,18 +28,24 @@ int Form::getExecGrade() const {
 }
 		
 void Form::beSigned(const Bureaucrat& bureaucrat) {
+	if (_isSigned)
+		throw FormSigned();
 	if (bureaucrat.getGrade() <= _signGrade)
 		_isSigned = true;
 	else
 		throw GradeTooLowException();
 }
 
-const char* Form::GradeTooHighException::what() const throw() {
-	return "Grade too high";
+const char* Form::GradeTooHighException::what() const noexcept {
+	return "grade too high";
 }
 		
-const char* Form::GradeTooLowException::what() const throw() {
-	return "Grade too low";
+const char* Form::GradeTooLowException::what() const noexcept {
+	return "grade too low";
+}
+
+const char* Form::FormSigned::what() const noexcept {
+	return "form is already signed";
 }
 		
 std::ostream& operator<<(std::ostream& os, const Form& form) {
