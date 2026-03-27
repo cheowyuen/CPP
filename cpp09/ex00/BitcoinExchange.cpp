@@ -38,32 +38,32 @@ int BitcoinExchange::processInput(const std::string& filename) {
 		size_t delim = line.find('|');
 		if (delim != std::string::npos) {
 			std::string date = line.substr(0, delim + 2);
-			std::regex dateFormat("^\\d{4}-\\d{2}-\\d{2} | $");
+			std::regex dateFormat("^\\d{4}-\\d{2}-\\d{2} \\| $");
 			if (std::regex_match(date, dateFormat))
 			{
 				int year = std::stoi(date.substr(0, 4));
 				int month = std::stoi(date.substr(5, 2));
 				int day = std::stoi(date.substr(8, 2));
 				if (month < 1 || month > 12 || day < 1) {
-					std::cout << "Error: bad input => " << line << std::endl;
+					std::cout << "Error: bad input1 => " << line << std::endl;
 					continue;
 				}
 				int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 				if (month == 2 && (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
 					if (day > 29) {
-						std::cout << "Error: bad input => " << line << std::endl;
+						std::cout << "Error: bad input2 => " << line << std::endl;
 						continue;
 					}
 				}
 				else {
 					if (day > days[month - 1]) {
-						std::cout << "Error: bad input => " << line << std::endl;
+						std::cout << "Error: bad input3 => " << line << std::endl;
 						continue;
 					}
 				}
 			}
 			else {
-				std::cout << "Error: bad input => " << line << std::endl;
+				std::cout << "Error: bad input4 => " << line << std::endl;
 				continue;
 			}
 			try {
@@ -78,11 +78,11 @@ int BitcoinExchange::processInput(const std::string& filename) {
 				}
 			}
 			catch (std::exception& e) {
-				std::cout << "Error: bad input => " << line << std::endl;
+				std::cout << "Error: bad input5 => " << line << std::endl;
 				continue;
 			}
 			float rate;
-			std::string date = line.substr(0, delim - 1);
+			date = line.substr(0, delim - 1);
 			std::map<std::string, float>::iterator it;
 			it = _data.find(date);
 			if (it != _data.end()) {
