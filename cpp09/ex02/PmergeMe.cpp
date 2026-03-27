@@ -2,7 +2,11 @@
 #include <iostream>
 
 void PmergeMe::parseInput(char **argv) {
-	std::cout << argv << std::endl;
+	int i = 1;
+	while (argv[i]) {
+		
+		i++;
+	}
 	return;
 }
 
