@@ -1,4 +1,3 @@
-#include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
@@ -32,31 +31,28 @@ void identify(Base& p) {
 		std::cout << "A\n";
 		return;
 	}
-	catch (...) {
-
-	}
+	catch (std::bad_cast&) {}
 	try {
 		(void)dynamic_cast<B&>(p);
 		std::cout << "B\n";
 		return;
 	}
-	catch (...) {
-		
-	}
+	catch (std::bad_cast&) {}
 	try {
 		(void)dynamic_cast<C&>(p);
 		std::cout << "C\n";
 		return;
 	}
-	catch (...) {
-		
-	}
+	catch (std::bad_cast&) {}
 }
 
 int main() {
-	Base* obj = generate();
-    identify(obj);
-    identify(*obj);
-    delete obj;
+	for (int i = 0; i < 5; i++) {
+		Base* obj = generate();
+		identify(obj);
+		identify(*obj);
+		delete obj;
+		std::cout << "-----\n";
+	}
 	return 0;
 }

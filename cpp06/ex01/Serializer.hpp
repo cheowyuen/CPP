@@ -6,9 +6,9 @@
 
 class Serializer {
 	private:
-		Serializer() = default;
-		~Serializer() = default;
-		Serializer(const Serializer &other) = default;
+		Serializer() = delete;
+		~Serializer() = delete;
+		Serializer(const Serializer &other) = delete;
 		Serializer &operator=(const Serializer &other) = delete;
 
 	public:
