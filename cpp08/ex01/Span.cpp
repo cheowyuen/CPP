@@ -16,17 +16,33 @@ void Span::addNumber(int num) {
 int Span::longestSpan() {
 	if (_v.size() <= 1)
 		throw std::logic_error("Not enough elements");
-	std::sort(_v.begin(), _v.end());
-	return (_v.back() - _v[0]);
+	std::vector<int> temp = _v;
+	std::sort(temp.begin(), temp.end());
+	return (temp.back() - temp.front());
 }
 
 int Span::shortestSpan() {
-	int shortest = std::numeric_limits<int>::max();
 	if (_v.size() <= 1)
 		throw std::logic_error("Not enough elements");
-	std::sort(_v.begin(), _v.end());
-	for (size_t i = 0; i < _v.size() - 1; i++) {
-		int span = _v[i + 1] - _v[i];
+	std::vector<int> temp = _v;
+	std::sort(temp.begin(), temp.end());
+	int shortest = std::numeric_limits<int>::max();
+	for (size_t i = 0; i < temp.size() - 1; i++) {
+		int span = temp[i + 1] - temp[i];
+		if (span < shortest)
+			shortest = span;
+	}
+	return (shortest);
+}
+
+int Span::shortestSpan() {
+	if (_v.size() <= 1)
+		throw std::logic_error("Not enough elements");
+	std::vector<int> temp = _v;
+	std::sort(temp.begin(), temp.end());
+	int shortest = temp[1] - temp[0];
+	for (size_t i = 1; i < temp.size() - 1; i++) {
+		int span = temp[i + 1] - temp[i];
 		if (span < shortest)
 			shortest = span;
 	}

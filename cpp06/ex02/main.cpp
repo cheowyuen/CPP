@@ -6,7 +6,7 @@
 #include <ctime>
 
 Base * generate(void) {
-	std::srand(time(nullptr));
+	std::srand(std::time(nullptr));
 	int r = std::rand() % 3;
 	if (r == 0)
 		return new A();

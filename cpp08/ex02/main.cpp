@@ -38,5 +38,6 @@ int main()
 	lst.push_back(0);
 	for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
     	std::cout << *it << std::endl;
+		
 	return 0;
 }
