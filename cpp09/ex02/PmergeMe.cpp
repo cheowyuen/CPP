@@ -27,6 +27,8 @@ int PmergeMe::parseInput(char **argv) {
 	for (size_t i = 0; i < _deq.size(); i++)
 		std::cout << " " << _deq[i];
 	std::cout << "\n";
+	pairAndSort(_vec);
+	// pairAndSort(_deq);
 	return 0;
 }
 

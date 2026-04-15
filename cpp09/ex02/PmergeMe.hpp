@@ -5,6 +5,7 @@
 #include <deque>
 #include <unordered_map>
 #include <utility>
+#include <iostream>
 
 class PmergeMe {
 	private:
@@ -22,50 +23,101 @@ class PmergeMe {
 		void sortDeque();
 
 		template <typename T>
-		void pairAndSort(T& c) {
+		std::vector<int> pairAndSort(T& c) {
 			if (c.size() < 2)
-				return;
-			int oddNum = -1;
+				return c;
+			// int oddNum = -1;
 			std::unordered_map<int, int> map;
-			for (size_t i = 0; i + 1 < c.size(); i += 2) {
-				if (c[i] < c[i + 1])
-					map[c[i]] = c[i + 1];
-				else
-					map[c[i + 1]] = c[i];
-			}
-			if (c.size() % 2 != 0)
-				oddNum = c.back();
 			std::vector<int> main;
 			std::vector<int> pending;
-			for (std::unordered_map<int, int>::iterator it = map.begin(); it != map.end(); it++) {
-				main.push_back(it->second);
-				pending.push_back(it->first);
+			for (size_t i = 0; i + 1 < c.size(); i += 2) {
+				if (c[i] < c[i + 1]) {
+					map[c[i]] = c[i + 1];
+					main.push_back(c[i + 1]);
+					pending.push_back(c[i]);
+				}
+				else {
+					map[c[i + 1]] = c[i];
+					main.push_back(c[i]);
+					pending.push_back(c[i + 1]);
+				}
 			}
-			pairAndSort(main);
-			if (!map.empty()) {
-				for (std::pair<int, int> pair : map) {
-					if (pair.second == main[0]) {
-						main.insert(main.begin(), pair.first);
+			// if (c.size() % 2 != 0)
+			// 	oddNum = c.back();
+			std::vector<int> sorted = pairAndSort(main);
+
+			std::vector<int> sortedP;
+			for (size_t i = 0; i < sorted.size(); i++) {
+				for (std::unordered_map<int, int>::iterator it = map.begin(); it != map.end(); it++) {
+					if (it->second == sorted[i]) {
+						sortedP.push_back(it->first);
 						break;
 					}
 				}
 			}
-			int prev = 1;
-			int index = 3;
-			while (index <= main.size()) {
-				int j = index - 1;
-				while (j > prev - 1) {
-					int pos = 0;
-					std::vector<int>::iterator it = std::find(main.begin(), main.end(), map[pending[j]]);
-					if (it != main.end())
-						pos = std::distance(main.begin(), it);
-					main.insert(main[pos], pending[j]);
-					j--;
+
+			std::cout << "main: ";
+			for (std::vector<int>::iterator it = main.begin(); it != main.end(); ++it)
+				std::cout << *it << " ";
+			std::cout << std::endl;
+
+			std::cout << "sorted: ";
+			for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+				std::cout << *it << " ";
+			std::cout << std::endl;
+
+			std::cout << "pending: ";
+			for (std::vector<int>::iterator it = pending.begin(); it != pending.end(); ++it)
+				std::cout << *it << " ";
+			std::cout << std::endl;
+
+			std::cout << "sortedP: ";
+			for (std::vector<int>::iterator it = sortedP.begin(); it != sortedP.end(); ++it)
+				std::cout << *it << " ";
+			std::cout << std::endl;
+
+			if (!map.empty()) {
+				for (std::pair<int, int> pair : map) {
+					if (pair.second == sorted[0]) {
+						sorted.insert(sorted.begin(), pair.first);
+						break;
+					}
 				}
-				int temp = index;
-				index = index + prev * 2;
-				prev = index;
 			}
+
+			// std::cout << "main: ";
+			// for (std::vector<int>::iterator it = main.begin(); it != main.end(); ++it)
+			// 	std::cout << *it << " ";
+			// std::cout << std::endl;
+
+			// std::cout << "sorted: ";
+			// for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+			// 	std::cout << *it << " ";
+			// std::cout << std::endl;
+
+			// std::cout << "pending: ";
+			// for (std::vector<int>::iterator it = pending.begin(); it != pending.end(); ++it)
+			// 	std::cout << *it << " ";
+			// std::cout << std::endl;
+
+			// int prev = 1;
+			// int index = 3;
+			// while (index <= main.size()) {
+			// 	int j = index - 1;
+			// 	while (j > prev - 1) {
+			// 		int pos = 0;
+			// 		std::vector<int>::iterator it = std::find(main.begin(), main.end(), map[pending[j]]);
+			// 		if (it != main.end())
+			// 			pos = std::distance(main.begin(), it);
+			// 		main.insert(main[pos], pending[j]);
+			// 		j--;
+			// 	}
+			// 	int temp = index;
+			// 	index = index + prev * 2;
+			// 	prev = index;
+			// }
+
+			return sorted;
 		}
 };
 
