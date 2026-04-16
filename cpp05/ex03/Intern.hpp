@@ -13,7 +13,7 @@ class Intern {
 	public:
 		Intern() = default;
 		~Intern() = default;
-		Intern(const Intern &other) = default;
+		Intern(const Intern& other) = default;
 		Intern& operator=(const Intern& other) = default; 
 		AForm* makeForm(const std::string& name, const std::string& target) const;
 };

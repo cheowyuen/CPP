@@ -15,6 +15,10 @@ class ShrubberyCreationForm : public AForm {
 		ShrubberyCreationForm(const ShrubberyCreationForm& other) = default;
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other) = delete; 
 		void executeAction() const;
+		class FileOpenException : public std::exception {
+			public:
+				const char* what() const noexcept;
+		};
 };
 
 #endif

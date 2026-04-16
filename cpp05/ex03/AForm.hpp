@@ -15,10 +15,10 @@ class AForm {
 
 	public:
 		AForm();
-		AForm(const std::string &name, int signGrade, int execGrade);
+		AForm(const std::string& name, int signGrade, int execGrade);
 		virtual ~AForm() = default;
 		AForm(const AForm& other) = default;
-		AForm &operator=(const AForm& other) = delete;
+		AForm& operator=(const AForm& other) = delete;
 		const std::string& getName() const;
 		bool getIsSigned() const;
 		int getSignGrade() const;

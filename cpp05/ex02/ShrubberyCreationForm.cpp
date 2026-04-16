@@ -8,11 +8,15 @@ ShrubberyCreationForm::ShrubberyCreationForm() :
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : 
 	AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
+const char* ShrubberyCreationForm::FileOpenException::what() const noexcept {
+	return "could not open file";
+}
+
 void ShrubberyCreationForm::executeAction() const {
-	std::ofstream outFile(_target + "_shrubbery");
-	if (!outFile.is_open()) {
-		std::cout << "Error opening file " + _target + "_shrubbery\n";
-		return;
+	std::ofstream outFile;
+	outFile.open(_target + "_shrubbery");
+	if (!outFile) {
+		throw FileOpenException();
 	}
 	outFile << R"(
 				  \_/
