@@ -6,17 +6,23 @@
 #include <cmath>
 
 void ScalarConverter::convert(const std::string& s) {
-    double d;
-    char* endPtr;
-    if (s.length() == 1 && !std::isdigit(static_cast<unsigned char>(s[0]))) {
-        d = static_cast<double>(s[0]);
-    } else {
-        d = std::strtod(s.c_str(), &endPtr);
-        if (endPtr && *endPtr != '\0' && !( *endPtr == 'f' && *(endPtr + 1) == '\0')) {
-			std::cout << "Conversion impossible\n";
-			return;
-        }
-    }
+	double d;
+	try {
+		size_t pos;
+		if (s.length() == 1 && !std::isdigit(static_cast<unsigned char>(s[0]))) {
+			d = static_cast<double>(s[0]);
+		} else {
+			d = std::stod(s, &pos);
+			if (!(pos == s.length() || (s[pos] == 'f' && pos + 1 == s.length()))) {
+				std::cout << "Conversion impossible\n";
+				return;
+			}
+		}
+	}
+	catch (std::exception& e) {
+		std::cout << "Conversion impossible\n";
+		return;
+	}
 
 	std::cout << "char: ";
 	if (std::isnan(d) || std::isinf(d) || d < 0 || d > 127)
@@ -39,7 +45,7 @@ void ScalarConverter::convert(const std::string& s) {
 	std::cout << "float: ";
 	if (std::isnan(d))
 		std::cout << "nanf\n";
-	else if (std::isinf(d)) 
+	else if (std::isinf(d))
 		std::cout << (d < 0 ? "-inff" : "+inff") << "\n";
 	else if (std::trunc(d) == d)
 		std::cout << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f\n";

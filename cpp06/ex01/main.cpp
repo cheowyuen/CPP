@@ -12,7 +12,7 @@ int main() {
 
 	if (restored == ptr) {
 		std::cout << "Success!\n";
-		std::cout << "int: " << restored->i << "\nstring: " << restored->s << ")\n";
+		std::cout << "int: " << restored->i << "\nstring: " << restored->s << "\n";
 	}
 	else {
 		std::cout << "Failure!\n";

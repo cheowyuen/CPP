@@ -6,7 +6,6 @@
 #include <ctime>
 
 Base * generate(void) {
-	std::srand(std::time(nullptr));
 	int r = std::rand() % 3;
 	if (r == 0)
 		return new A();
@@ -47,6 +46,7 @@ void identify(Base& p) {
 }
 
 int main() {
+	std::srand(std::time(nullptr));
 	for (int i = 0; i < 5; i++) {
 		Base* obj = generate();
 		identify(obj);
