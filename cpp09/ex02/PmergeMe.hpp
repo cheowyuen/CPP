@@ -26,7 +26,7 @@ class PmergeMe {
 		std::vector<int> pairAndSort(T& c) {
 			if (c.size() < 2)
 				return c;
-			// int oddNum = -1;
+			int oddNum = -1;
 			std::unordered_map<int, int> map;
 			std::vector<int> main;
 			std::vector<int> pending;
@@ -42,8 +42,8 @@ class PmergeMe {
 					pending.push_back(c[i + 1]);
 				}
 			}
-			// if (c.size() % 2 != 0)
-			// 	oddNum = c.back();
+			if (c.size() % 2 != 0)
+				oddNum = c.back();
 			std::vector<int> sorted = pairAndSort(main);
 
 			std::vector<int> sortedP;
@@ -55,6 +55,81 @@ class PmergeMe {
 					}
 				}
 			}
+
+			if (!map.empty()) {
+				for (std::pair<int, int> pair : map) {
+					if (pair.second == sorted[0]) {
+						sorted.insert(sorted.begin(), pair.first);
+						break;
+					}
+				}
+			}
+
+	size_t prev = 0;
+	size_t index = 2;
+	size_t oriIndex;
+	bool last = false;
+	if (main.size() <= index) {
+		index = main.size() - 1;
+		last = true;
+	}
+	oriIndex = index;
+	std::cout << "index: " << index << std::endl;
+	std::cout << "size: " << main.size() << std::endl;
+	if (main.size() > 1) {
+		while (index < main.size()) {
+			size_t i = index;
+			std::cout << "i: " << i << std::endl;
+			std::cout << "prev: " << prev << std::endl;
+			while (i > prev) {
+				size_t left = 0;
+				std::vector<int>::iterator it = std::find(sorted.begin(), sorted.end(), map[sortedP[i]]);
+				size_t right = it - sorted.begin();
+				while (left < right) {
+					size_t mid = (left + right) / 2;
+					if (sortedP[i] < sorted[mid])
+						right = mid;
+					else
+						left = mid + 1;
+				}
+				std::cout << "left: " << left << std::endl;
+				std::cout << "value: " << sortedP[i] << std::endl;
+				sorted.insert(sorted.begin() + left, sortedP[i]);
+				i--;
+				std::cout << "i2: " << i << std::endl;
+				std::cout << "prev2: " << prev << std::endl;
+			}
+			size_t temp = index;
+			index = (oriIndex + 1) + (prev + 1) * 2;
+			std::cout << "main: " << main.size() << std::endl;
+			std::cout << "ori: " << oriIndex << std::endl;
+			std::cout << "ori prev: " << prev << std::endl;
+			if (main.size() <= index &&  !last) {
+				index = main.size() - 1;
+				last = true;
+			}
+			oriIndex  = index;
+			prev = temp;
+			std::cout << "temp: " << temp << std::endl;
+			std::cout << "new index: " << index << std::endl;
+		}
+		if (oddNum != -1) {
+			size_t left = 0;
+			size_t right = sorted.size();
+
+			while (left < right)
+			{
+				size_t mid = (left + right) / 2;
+
+				if (oddNum < sorted[mid])
+					right = mid;
+				else
+					left = mid + 1;
+			}
+
+			sorted.insert(sorted.begin() + left, oddNum);
+		}
+	}
 
 			std::cout << "main: ";
 			for (std::vector<int>::iterator it = main.begin(); it != main.end(); ++it)
@@ -76,88 +151,8 @@ class PmergeMe {
 				std::cout << *it << " ";
 			std::cout << std::endl;
 
-			if (!map.empty()) {
-				for (std::pair<int, int> pair : map) {
-					if (pair.second == sorted[0]) {
-						sorted.insert(sorted.begin(), pair.first);
-						break;
-					}
-				}
-			}
-
-			// std::cout << "main: ";
-			// for (std::vector<int>::iterator it = main.begin(); it != main.end(); ++it)
-			// 	std::cout << *it << " ";
-			// std::cout << std::endl;
-
-			// std::cout << "sorted: ";
-			// for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it)
-			// 	std::cout << *it << " ";
-			// std::cout << std::endl;
-
-			// std::cout << "pending: ";
-			// for (std::vector<int>::iterator it = pending.begin(); it != pending.end(); ++it)
-			// 	std::cout << *it << " ";
-			// std::cout << std::endl;
-
-			// int prev = 1;
-			// int index = 3;
-			// while (index <= main.size()) {
-			// 	int j = index - 1;
-			// 	while (j > prev - 1) {
-			// 		int pos = 0;
-			// 		std::vector<int>::iterator it = std::find(main.begin(), main.end(), map[pending[j]]);
-			// 		if (it != main.end())
-			// 			pos = std::distance(main.begin(), it);
-			// 		main.insert(main[pos], pending[j]);
-			// 		j--;
-			// 	}
-			// 	int temp = index;
-			// 	index = index + prev * 2;
-			// 	prev = index;
-			// }
-
 			return sorted;
 		}
 };
 
 #endif
-
-// struct element {
-// 				int main;
-// 				int pending;
-// 			};
-// 			std::vector<element> pairs;
-// 			for (size_t i = 0; i + 1 < c.size(); i += 2) {
-// 				if (c[i] > c[i + 1])
-// 					pairs.push_back({c[i], c[i + 1]});
-// 				else
-// 					pairs.push_back({c[i + 1], c[i]});
-// 			}
-// 			if (c.size() % 2 != 0)
-// 				oddNum = c.back();
-// 			std::vector<int> mainSeq;
-// 			for (element p : pairs)
-// 				mainSeq.push_back(p.main);
-// 			pairAndSort(mainSeq);
-// 			if (!pairs.empty())
-// 				mainSeq.insert(mainSeq.begin(), pairs[0].pending)
-// 			int prev = 1;
-// 			int index = 3;
-// 			while (index <= mainSeq.size()) {
-// 				int j = index - 1;
-// 				while (j > prev - 1) {
-// 					int pos = 0;
-
-// 					for (size_t i = 0; i < mainSeq.size(); i++) {
-// 						if (pairs[i].pending = pairs[j].pending) {
-// 							pos = i; 
-// 						}
-// 					}
-// 					mainSeq.insert(mainSeq[pos], pairs[j].pending);
-// 					j--;
-// 				}
-// 				int temp = index;
-// 				index = index + prev * 2;
-// 				prev = index;
-// 			}
