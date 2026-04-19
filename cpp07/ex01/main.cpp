@@ -1,5 +1,5 @@
 #include "iter.hpp"
-#include <iostream>
+#include <string>
 
 template <typename T>
 void multiplyTen(T& value) {
@@ -16,7 +16,7 @@ int main( void ) {
 	iter(intArr, 3, multiplyTen<int>);
 	for (int i = 0; i < 3; i++)
 		std::cout << intArr[i] << "\n";
-	const int constArr[] = {4, 5, 6};
-	iter(constArr, 3, printInt<int>);
+	const std::string constArr[] = {"a", "b", "c"};
+	iter(constArr, 3, printInt<std::string>);
 	return 0;
 }
