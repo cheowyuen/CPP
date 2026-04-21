@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include <ctime>
+#include <exception>
 
 int main()
 {
@@ -19,7 +20,7 @@ int main()
 	try {
 		sp.addNumber(1);
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 
@@ -56,13 +57,13 @@ int main()
 	try {
 		std::cout << spZero.shortestSpan() <<"\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 	try {
 		std::cout << spZero.longestSpan() << "\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 
@@ -72,13 +73,13 @@ int main()
 	try {
 		std::cout << spOne.shortestSpan() <<"\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 	try {
 		std::cout << spOne.longestSpan() << "\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 

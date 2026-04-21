@@ -2,11 +2,12 @@
 #include <fstream>
 #include <iostream>
 #include <regex>
+#include <exception>
 
 int BitcoinExchange::loadDatabase() {
 	std::ifstream inFile("data.csv");
 	if (!inFile.is_open()) {
-		std::cerr << "Error: could not open file data.csv" << std::endl;
+		std::cerr << "Error: could not open file.\n";
 		return -1;
 	}
 	std::string line;
@@ -14,19 +15,24 @@ int BitcoinExchange::loadDatabase() {
 	while (std::getline(inFile, line)) {
 		if (line.empty())
 			continue;
-		std::string date = line.substr(0, 10);
-		float value = std::stof(line.substr(11, line.length() - 11));
-		_data[date] = value;
+		size_t comma = line.find(',');
+		std::string date = line.substr(0, comma);
+		try {
+			float value = std::stof(line.substr(comma + 1));
+			_data[date] = value;
+		}
+		catch (const std::exception&) {
+			std::cerr << "Error: invalid database value\n";
+			return -1;
+		}
 	}
 	return 0;
 }
 
 int BitcoinExchange::processInput(const std::string& filename) {
-	if (loadDatabase() == -1)
-		return -1;
 	std::ifstream inFile(filename);
 	if (!inFile.is_open()) {
-		std::cerr << "Error: could not open file " << filename << std::endl;
+		std::cerr << "Error: could not open file.\n";
 		return -1;
 	}
 	std::string line;
@@ -41,44 +47,50 @@ int BitcoinExchange::processInput(const std::string& filename) {
 			std::regex dateFormat("^\\d{4}-\\d{2}-\\d{2} \\| $");
 			if (std::regex_match(date, dateFormat))
 			{
-				int year = std::stoi(date.substr(0, 4));
-				int month = std::stoi(date.substr(5, 2));
-				int day = std::stoi(date.substr(8, 2));
-				if (month < 1 || month > 12 || day < 1) {
-					std::cerr << "Error: bad input => " << line << std::endl;
+				try {
+					int year = std::stoi(date.substr(0, 4));
+					int month = std::stoi(date.substr(5, 2));
+					int day = std::stoi(date.substr(8, 2));
+					if (month < 1 || month > 12 || day < 1) {
+						std::cerr << "Error: bad input => " << line << "\n";
+						continue;
+					}
+					int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+					if (month == 2 && (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
+						if (day > 29) {
+							std::cerr << "Error: bad input => " << line << "\n";
+							continue;
+						}
+					}
+					else {
+						if (day > days[month - 1]) {
+							std::cerr << "Error: bad input => " << line << "\n";
+							continue;
+						}
+					}
+				}
+				catch (const std::exception&) {
+					std::cerr << "Error: bad input => " << line << "\n";
 					continue;
-				}
-				int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-				if (month == 2 && (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
-					if (day > 29) {
-						std::cerr << "Error: bad input => " << line << std::endl;
-						continue;
-					}
-				}
-				else {
-					if (day > days[month - 1]) {
-						std::cerr << "Error: bad input => " << line << std::endl;
-						continue;
-					}
 				}
 			}
 			else {
-				std::cerr << "Error: bad input => " << line << std::endl;
+				std::cerr << "Error: bad input => " << line << "\n";
 				continue;
 			}
 			try {
 				value = std::stof(line.substr(delim + 2));
 				if (value < 0) {
-					std::cerr << "Error: not a positive number." << std::endl;
+					std::cerr << "Error: not a positive number.\n";
 					continue;
 				}
 				if (value > 1000) {
-					std::cerr << "Error: too large a number." << std::endl;
+					std::cerr << "Error: too large a number.\n";
 					continue;
 				}
 			}
-			catch (std::exception& e) {
-				std::cerr << "Error: bad input => " << line << std::endl;
+			catch (const std::exception&) {
+				std::cerr << "Error: bad input => " << line << "\n";
 				continue;
 			}
 			float rate;
@@ -91,17 +103,17 @@ int BitcoinExchange::processInput(const std::string& filename) {
 			else {
 				it = _data.upper_bound(date);
 				if (it == _data.begin()) {
-					std::cerr << "Error: bad input => " << line << std::endl;
+					std::cerr << "Error: bad input => " << line << "\n";
 					continue;
 				}
 				--it;
 				rate = it->second;
 			}
 			float result = value * rate;
-			std::cout << date << " => " << value << " = " << result << std::endl;
+			std::cout << date << " => " << value << " = " << result << "\n";
 		}
 		else {
-			std::cerr << "Error: bad input => " << line << std::endl;
+			std::cerr << "Error: bad input => " << line << "\n";
 			continue;
 		}
 	}
