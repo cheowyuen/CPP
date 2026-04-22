@@ -10,16 +10,19 @@ int main() {
 	form = someRandomIntern.makeForm("shrubbery creation", "Trees");
 	tomNook.signForm(*form);
 	tomNook.executeForm(*form);
+	delete form;
 
 	std::cout << "\n===== Robotomy Request =====\n";
 	form = someRandomIntern.makeForm("robotomy request", "Bender");
 	tomNook.signForm(*form);
 	tomNook.executeForm(*form);
+	delete form;
 
 	std::cout << "\n===== Presidential Pardon =====\n";
 	form = someRandomIntern.makeForm("presidential pardon", "Redd");
 	tomNook.signForm(*form);
 	tomNook.executeForm(*form);
+	delete form;
 
 	std::cout << "\n===== Nonexistent =====\n";
 	form = someRandomIntern.makeForm("abc", "def");
