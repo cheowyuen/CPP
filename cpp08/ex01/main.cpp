@@ -1,14 +1,15 @@
 #include "Span.hpp"
 #include <iostream>
 #include <random>
-#include <algorithm>
+#include <ctime>
 #include <exception>
+#include <algorithm>
 
 int main()
 {
 	Span sp = Span(5);
 
-	sp.addNumber(6);
+	sp.addNumber(3);
 	sp.addNumber(3);
 	sp.addNumber(17);
 	sp.addNumber(9);
@@ -20,7 +21,7 @@ int main()
 	try {
 		sp.addNumber(1);
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 
@@ -33,29 +34,37 @@ int main()
 	std::cout << spLarge.shortestSpan() << "\n";
 	std::cout << spLarge.longestSpan() << "\n";
 
-	std::cout << "---- 10000 random numbers ----\n";
-	Span spRand = Span(10000);
-	std::vector<int> nums2(10000);
-	for (int i = 0; i < 10000; i++)
-		nums2[i] = std::rand() % 100000;
+	std::cout << "---- 10 random numbers ----\n";
+	Span spRand = Span(10);
+	std::vector<int> nums2(10);
+	std::srand(std::time(nullptr));
+	for (int i = 0; i < 10; i++)  {
+		nums2[i] = std::rand() % 100;
+		std::cout << nums2[i] << " ";
+	}
+	std::cout << "\n";
 	spRand.addMultiple(nums2.begin(), nums2.end());
-	std::sort(nums2.begin(), nums2.end());
-	std::cout << "Smallest: " << nums2.front() << "\nLargest: " << nums2.back() << "\n";
 	std::cout << spRand.shortestSpan() << "\n";
 	std::cout << spRand.longestSpan() << "\n";
+	std::cout << "sorted: ";
+	std::sort(nums2.begin(), nums2.end());
+	for (int i = 0; i < 10; i++)  {
+		std::cout << nums2[i] << " ";
+	}
+	std::cout << "\n";
 
 	std::cout << "---- 0 number ----\n";
-	Span spZero;
+	Span spZero= Span(0);
 	try {
 		std::cout << spZero.shortestSpan() <<"\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 	try {
 		std::cout << spZero.longestSpan() << "\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 
@@ -65,13 +74,13 @@ int main()
 	try {
 		std::cout << spOne.shortestSpan() <<"\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 	try {
 		std::cout << spOne.longestSpan() << "\n";
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 

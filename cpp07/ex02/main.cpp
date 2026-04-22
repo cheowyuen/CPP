@@ -53,7 +53,7 @@ int main( void ) {
         std::cout << b[100] << "\n";
     }
     catch (std::exception& e) {
-        std::cout << "Error: " << e.what() << "\n";
+        std::cerr << "Error: " << e.what() << "\n";
     }
 
 	return 0;

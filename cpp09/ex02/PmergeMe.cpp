@@ -34,7 +34,7 @@ void PmergeMe::sortVector() {
 	for (size_t i = 0; i < _vec.size(); i++)
 		std::cout << " " << _vec[i];
 	std::cout << "\n";
-	pairAndSort(_vec);
+	_vec = pairAndSort(_vec);
 	std::cout << "After:";
 	for (size_t i = 0; i < _vec.size(); i++)
 		std::cout << " " << _vec[i];

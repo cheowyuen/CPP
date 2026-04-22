@@ -38,6 +38,36 @@ int main()
 	lst.push_back(0);
 	for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
     	std::cout << *it << std::endl;
-		
+
+	std::cout << "\n===== Const =====\n";
+	const MutantStack<int> cmstack(mstack);
+	MutantStack<int>::const_iterator cit = cmstack.begin();
+	MutantStack<int>::const_iterator cite = cmstack.end();
+	while (cit != cite)
+	{
+		std::cout << *cit << std::endl;
+		++cit;
+	}
+
+	std::cout << "\n===== Reverse =====\n";
+	MutantStack<int> rmstack(mstack);
+	MutantStack<int>::reverse_iterator rit = rmstack.rbegin();
+	MutantStack<int>::reverse_iterator rite = rmstack.rend();
+	while (rit != rite)
+	{
+		std::cout << *rit << std::endl;
+		++rit;
+	}
+
+	std::cout << "\n===== Const Reverse  =====\n";
+	const MutantStack<int> crmstack(mstack);
+	MutantStack<int>::const_reverse_iterator crit = crmstack.rbegin();
+	MutantStack<int>::const_reverse_iterator crite = crmstack.rend();
+	while (crit != crite)
+	{
+		std::cout << *crit << std::endl;
+		++crit;
+	}
+
 	return 0;
 }
