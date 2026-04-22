@@ -1,5 +1,5 @@
 #include "PmergeMe.hpp"
-#include <ctime>
+#include <chrono>
 
 
 int main(int argc, char** argv) {
@@ -12,18 +12,18 @@ int main(int argc, char** argv) {
 	if (p.parseInput(argv) == -1)
 		return 1;
 
-	clock_t start = clock();
+	auto start = std::chrono::steady_clock::now();
 	p.sortVector();
-	clock_t end = clock();
-	double time_us = (double)(end - start) * 1000000.0 / CLOCKS_PER_SEC;
+	auto end = std::chrono::steady_clock::now();
+	auto duration = std::chrono::duration<double, std::micro>(end - start).count();
 
-	clock_t start2 = clock();
+	auto startD = std::chrono::steady_clock::now();
 	p.sortDeque();
-	clock_t end2 = clock();
-	double time_us2 = (double)(end2 - start2) * 1000000.0 / CLOCKS_PER_SEC;
+	auto endD = std::chrono::steady_clock::now();
+	auto durationD = std::chrono::duration<double, std::micro>(endD - startD).count();
 
-	std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << time_us << " us\n";
-	std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque : " << time_us2 << " us\n";
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << duration << " us\n";
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque : " << durationD << " us\n";
 
 	return 0;
 }

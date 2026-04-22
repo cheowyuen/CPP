@@ -7,7 +7,7 @@ void multiplyTen(T& value) {
 }
 
 template <typename T>
-void printInt(const T& value) {
+void printVal(const T& value) {
 	std::cout << value << "\n";
 }
 
@@ -17,6 +17,6 @@ int main( void ) {
 	for (int i = 0; i < 3; i++)
 		std::cout << intArr[i] << "\n";
 	const std::string constArr[] = {"a", "b", "c"};
-	iter(constArr, 3, printInt<std::string>);
+	iter(constArr, 3, printVal<std::string>);
 	return 0;
 }

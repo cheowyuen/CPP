@@ -55,6 +55,12 @@ int main( void ) {
     catch (std::exception& e) {
         std::cerr << "Error: " << e.what() << "\n";
     }
+	try {
+        std::cout << f[3] << "\n";
+    }
+    catch (std::exception& e) {
+        std::cerr << "Error: " << e.what() << "\n";
+    }
 
 	return 0;
 }

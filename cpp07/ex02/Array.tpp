@@ -4,7 +4,7 @@
 #include "Array.hpp"
 
 template <typename T>
-Array<T>::Array() : _array(nullptr), _size(0) {}
+Array<T>::Array() : _array(new T[0]), _size(0) {}
 
 template <typename T>
 Array<T>::Array(unsigned int n) : _array(new T[n]()), _size(n) {}
