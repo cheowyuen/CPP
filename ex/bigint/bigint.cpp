@@ -1,22 +1,14 @@
 #include "bigint.hpp"
 #include <algorithm>
+#include <sstream>
 
 bigint::bigint() : digits("0") {}
 
-bigint::bigint(unsigned long long n)
+bigint::bigint(unsigned int n)
 {
-    if (n == 0)
-    {
-        digits = "0";
-        return;
-    }
-
-    digits = "";
-    while (n > 0)
-    {
-        digits.insert(digits.begin(), (n % 10) + '0');
-        n /= 10;
-    }
+	std::stringstream ss;
+	ss << n;
+	this->digits = ss.str();
 }
 
 bigint::bigint(const bigint &other)

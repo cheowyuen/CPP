@@ -15,7 +15,7 @@ private:
 
 public:
     bigint();
-    bigint(unsigned long long n);
+    bigint(unsigned int n);
     bigint(const bigint &other);
 	~bigint();
 
