@@ -4,7 +4,7 @@
 
 int PmergeMe::parseInput(char **argv) {
 	int i = 1;
-	std::set<int> seen;
+	std::set<int> input;
 	while (argv[i]) {
 		try {
 			size_t pos;
@@ -13,7 +13,7 @@ int PmergeMe::parseInput(char **argv) {
 				std::cerr << "Error\n";
 				return -1;
 			}
-			if (!seen.insert(token).second) {
+			if (!input.insert(token).second) {
 				std::cerr << "Error: Duplicate numbers\n";
 				return -1;
 			}
@@ -30,12 +30,12 @@ int PmergeMe::parseInput(char **argv) {
 }
 
 void PmergeMe::sortVector() {
-	std::cout << "Vector before:";
+	std::cout << "Before:";
 	for (size_t i = 0; i < _vec.size(); i++)
 		std::cout << " " << _vec[i];
 	std::cout << "\n";
 	pairAndSort(_vec);
-	std::cout << "Vector after:";
+	std::cout << "After:";
 	for (size_t i = 0; i < _vec.size(); i++)
 		std::cout << " " << _vec[i];
 	std::cout << "\n";
@@ -43,14 +43,6 @@ void PmergeMe::sortVector() {
 }
 
 void PmergeMe::sortDeque() {
-	std::cout << "Deque before:";
-	for (size_t i = 0; i < _deq.size(); i++)
-		std::cout << " " << _deq[i];
-	std::cout << "\n";
 	pairAndSort(_deq);
-	std::cout << "Deque after:";
-	for (size_t i = 0; i < _deq.size(); i++)
-		std::cout << " " << _deq[i];
-	std::cout << "\n";
 	return;
 }

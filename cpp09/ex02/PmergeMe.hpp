@@ -75,13 +75,13 @@ class PmergeMe {
 				last = true;
 			}
 			oriIndex = index;
-			std::cout << "index: " << index << std::endl;
-			std::cout << "size: " << main.size() << std::endl;
+			// std::cout << "index: " << index << std::endl;
+			// std::cout << "size: " << main.size() << std::endl;
 			if (main.size() > 1) {
 				while (index < main.size()) {
 					size_t i = index;
-					std::cout << "i: " << i << std::endl;
-					std::cout << "prev: " << prev << std::endl;
+					// std::cout << "i: " << i << std::endl;
+					// std::cout << "prev: " << prev << std::endl;
 					while (i > prev) {
 						size_t left = 0;
 						auto it = std::find(sorted.begin(), sorted.end(), map[sortedP[i]]);
@@ -93,26 +93,26 @@ class PmergeMe {
 							else
 								left = mid + 1;
 						}
-						std::cout << "left: " << left << std::endl;
-						std::cout << "value: " << sortedP[i] << std::endl;
+						// std::cout << "left: " << left << std::endl;
+						// std::cout << "value: " << sortedP[i] << std::endl;
 						sorted.insert(sorted.begin() + left, sortedP[i]);
 						i--;
-						std::cout << "i2: " << i << std::endl;
-						std::cout << "prev2: " << prev << std::endl;
+						// std::cout << "i2: " << i << std::endl;
+						// std::cout << "prev2: " << prev << std::endl;
 					}
 					size_t temp = index;
 					index = (oriIndex + 1) + (prev + 1) * 2;
-					std::cout << "main: " << main.size() << std::endl;
-					std::cout << "ori: " << oriIndex << std::endl;
-					std::cout << "ori prev: " << prev << std::endl;
+					// std::cout << "main: " << main.size() << std::endl;
+					// std::cout << "ori: " << oriIndex << std::endl;
+					// std::cout << "ori prev: " << prev << std::endl;
 					if (main.size() <= index &&  !last) {
 						index = main.size() - 1;
 						last = true;
 					}
 					oriIndex  = index;
 					prev = temp;
-					std::cout << "temp: " << temp << std::endl;
-					std::cout << "new index: " << index << std::endl;
+					// std::cout << "temp: " << temp << std::endl;
+					// std::cout << "new index: " << index << std::endl;
 				}
 			}
 

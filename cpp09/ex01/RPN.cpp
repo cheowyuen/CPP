@@ -22,7 +22,7 @@ int RPN::calculate(const std::string& input) {
 				result = a * b;
 			else if (token == "/") {
 				if (b == 0) {
-					std::cerr << "Error: Division by zero\n";
+					std::cerr << "Error\n";
 					return -1;
 				}
 				result = a / b;
