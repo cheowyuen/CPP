@@ -29,7 +29,7 @@ int main() {
 	{
 		std::cout << "---- const ----"  << "\n";
 		const std::list<int> c{4, 5, 6};
-		std::list<int>::const_iterator it = easyfind(c, 4);
+		std::list<int>::const_iterator it = easyfind(c, 6);
 		int index = std::distance(c.begin(), it);
 		std::cout << "Value found at index " << index << ": " << *it << "\n";
 		try {
