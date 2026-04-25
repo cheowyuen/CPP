@@ -64,7 +64,6 @@ std::string bigint::add_strings(const std::string &a, const std::string &b)
     return res;
 }
 
-// stoi
 size_t bigint::to_size_t() const
 {
     size_t n = 0;
