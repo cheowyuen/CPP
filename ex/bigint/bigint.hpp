@@ -37,6 +37,8 @@ public:
 
     bigint operator>>(const bigint &other) const;
     bigint &operator>>=(const bigint &other);
+	bigint operator<<(const bigint &other) const;
+    bigint &operator<<=(const bigint &other);
 
     bool operator<(const bigint &other) const;
     bool operator>(const bigint &other) const;

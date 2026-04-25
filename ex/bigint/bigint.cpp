@@ -154,14 +154,12 @@ bigint &bigint::operator>>=(const bigint &other)
     return (*this) >>= other.to_size_t();
 }
 
-// <<
-bigint bigint::operator>>(const bigint &other) const
+bigint bigint::operator<<(const bigint &other) const
 {
     return (*this) << other.to_size_t();
 }
 
-// <<=
-bigint &bigint::operator>>=(const bigint &other)
+bigint &bigint::operator<<=(const bigint &other)
 {
     return (*this) <<= other.to_size_t();
 }
