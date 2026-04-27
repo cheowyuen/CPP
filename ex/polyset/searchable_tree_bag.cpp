@@ -1,21 +1,26 @@
-#ifndef SET_HPP
-#define SET_HPP
+#include "searchable_tree_bag.hpp"
 
-#include "searchable_bag.hpp"
+searchable_tree_bag::searchable_tree_bag() : tree_bag() {}
 
-class set {
-private:
-    searchable_bag *bag;
+searchable_tree_bag::searchable_tree_bag(const searchable_tree_bag& other) : tree_bag(other) {}
 
-public:
-    set(searchable_bag *b);
-    set(const set &other);
-    set &operator=(const set &other);
-    ~set();
+searchable_tree_bag& searchable_tree_bag::operator=(const searchable_tree_bag& other) {
+	if (this != &other)
+		tree_bag::operator=(other);
+	return *this;
+}
 
-    void insert(int value);
-    void remove(int value);
-    bool contains(int value) const;
-};
+searchable_tree_bag::~searchable_tree_bag() {}
 
-#endif
+bool searchable_tree_bag::has(int value) const {
+	node* curr = tree;
+	while (curr != 0) {
+		if (curr->value == value)
+			return true;
+		if (value < curr->value)
+			curr = curr->l;
+		else
+			curr = curr->r;
+	}
+	return false;
+}

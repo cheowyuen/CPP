@@ -1,23 +1,17 @@
-#include "searchable_array_bag.hpp"
+#ifndef SEARCHABLE_TREE_BAG_HPP
+#define SEARCHABLE_TREE_BAG_HPP
 
-searchable_array_bag::searchable_array_bag() : array_bag() {}
+#include "tree_bag.hpp"
+#include "searchable_bag.hpp"
 
-searchable_array_bag::searchable_array_bag(const searchable_array_bag &other)
-    : array_bag(other) {}
+class searchable_tree_bag : public tree_bag, public searchable_bag {
+	public:
+		searchable_tree_bag();
+		searchable_tree_bag(const searchable_tree_bag& other);
+		searchable_tree_bag& operator=(const searchable_tree_bag& other);
+		~searchable_tree_bag();
 
-searchable_array_bag &
-searchable_array_bag::operator=(const searchable_array_bag &other) {
-    if (this != &other)
-        array_bag::operator=(other);
-    return *this;
-}
+		bool has(int value) const;
+};
 
-searchable_array_bag::~searchable_array_bag() {}
-
-bool searchable_array_bag::search(int value) const {
-    for (size_t i = 0; i < this->size(); ++i) {
-        if (this->get(i) == value)
-            return true;
-    }
-    return false;
-}
+#endif
