@@ -1,39 +1,43 @@
 #include "set.hpp"
 
-set::set(searchable_bag& b) : bagPtr(&b) {}
+set::set(searchable_bag& b) : bag_ptr(&b) {}
 
-set::set(const set& other) : bagPtr(other.bagPtr) {}
+set::set(const set& other) : bag_ptr(other.bag_ptr) {}
 
 set& set::operator=(const set& other) {
-	if (this != &other)
-		bagPtr = other.bagPtr;
+	if (this != &other) {
+		bag_ptr = other.bag_ptr;
+	}
 	return *this;
 }
 
 set::~set() {}
 
-searchable_bag& set::get_bag() {return *bagPtr;}
-
-const searchable_bag& set::get_bag() const {return *bagPtr;}
-
-void set::insert(int value) {
-	if (!bagPtr->has(value))
-		bagPtr->insert(value);
+searchable_bag& set::get_bag() {
+	return *bag_ptr;
 }
 
-void set::insert(int *array, int size) {
-	for (int i = 0; i < size; i++) 
+const searchable_bag& set::get_bag() const {
+	return *bag_ptr;}
+
+void set::insert (int value) {
+	if (!bag_ptr->has(value))
+		bag_ptr->insert(value);
+}
+
+void set::insert (int *array, int size) {
+	for (int i = 0; i < size; i++)
 		insert(array[i]);
 }
 
 void set::print() const {
-	bagPtr->print();
+	bag_ptr->print();
 }
 
 void set::clear() {
-	bagPtr->clear();
+	bag_ptr->clear();
 }
 
 bool set::has(int value) const {
-	return bagPtr->has(value);
+	return bag_ptr->has(value);
 }

@@ -30,7 +30,34 @@ int& vect2::operator[](int index) {
 }
 
 const int& vect2::operator[](int index) const {
-	return data[index];
+	return data[index];}
+
+vect2 vect2::operator-() const {
+	return vect2(-data[0], -data[1]);
+}
+
+vect2& vect2::operator++() {
+	++data[0];
+	++data[1];
+	return *this;
+}
+
+vect2& vect2::operator--() {
+	--data[0];
+	--data[1];
+	return *this;
+}
+
+vect2 vect2::operator++(int) {
+	vect2 tmp(*this);
+	++(*this);
+	return tmp;
+}
+
+vect2 vect2::operator--(int) {
+	vect2 tmp(*this);
+	--(*this);
+	return tmp;
 }
 
 vect2 vect2::operator+(const vect2& other) const {
@@ -63,36 +90,8 @@ vect2& vect2::operator*=(int scalar) {
 	return *this;
 }
 
-vect2 vect2::operator-() const {
-	return vect2(-data[0], -data[1]);
-}
-
-vect2& vect2::operator++() {
-	++data[0];
-	++data[1];
-	return *this;
-}
-
-vect2& vect2::operator--() {
-	--data[0];
-	--data[1];
-	return *this;
-}
-
-vect2 vect2::operator++(int) {
-	vect2 tmp(*this);
-	++(*this);
-	return tmp;
-}
-
-vect2 vect2::operator--(int) {
-	vect2 tmp(*this);
-	--(*this);
-	return tmp;
-}
-
 bool vect2::operator==(const vect2& other) const {
-	return data[0] == other.data[0] && data[1] == other.data[1];
+	return (data[0] == other.data[0] && data[1] == other.data[1]);
 }
 
 bool vect2::operator!=(const vect2& other) const {

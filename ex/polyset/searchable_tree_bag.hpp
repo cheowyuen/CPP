@@ -1,5 +1,5 @@
-#ifndef SEARCHABLE_TREE_BAG_HPP
-#define SEARCHABLE_TREE_BAG_HPP
+#ifndef SEARCHABLE_TREE_BAY_HPP
+#define SEARCHABLE_TREE_BAY_HPP
 
 #include "tree_bag.hpp"
 #include "searchable_bag.hpp"
