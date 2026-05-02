@@ -1,5 +1,5 @@
-#ifndef LIFE_HPP
-#define LIFE_HPP
+#ifndef LIFE_COPY_HPP
+#define LIFE_COPY_HPP
 
 #include <stdlib.h>
 #include <unistd.h>

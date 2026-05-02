@@ -1,4 +1,4 @@
-#include "life.h"
+#include "life_copy.h"
 
 void ft_putchar(char c) {
 	write(1, &c, 1);
