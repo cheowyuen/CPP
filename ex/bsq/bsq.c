@@ -107,7 +107,11 @@ int solve_bsq(t_map *map) {
 			free(dp);
 			return 0;
 		}
+		i++;
+	}
 
+	i = 0;
+	while (i < map->lines) {
 		j = 0;
 		while(j < map->cols) {
 			if (map->grid[i][j] == map->obstacle)
