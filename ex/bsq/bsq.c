@@ -1,7 +1,7 @@
 #include "bsq.h"
 
 void print_error() {
-	fprintf(stdout, "map error\n");
+	fprintf(stderr, "map error\n");
 }
 
 void free_map(t_map *map) {
