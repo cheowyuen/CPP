@@ -4,7 +4,7 @@ int count_neighbors(t_env *e, int x, int y) {
 	int count = 0;
 	for (int i = -1; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++) {
-			if (i == 0 && j == 0)
+			if (i == 0 && j == 0) 
 				continue;
 			int nx = x + j;
 			int ny = y + i;
@@ -19,7 +19,7 @@ int count_neighbors(t_env *e, int x, int y) {
 
 void step(t_env *e) {
 	for (int y = 0; y < e->h; y++) {
-		for (int x= 0; x < e->w; x++) {
+		for (int x = 0; x < e->w; x++) {
 			int neighbors = count_neighbors(e, x, y);
 			int index = y * e->w + x;
 			if (e->board[index])
@@ -41,7 +41,7 @@ void parse_input(t_env *e) {
 	int y = 0;
 	int drawing = 0;
 
-	while (read(0, &c, 1) > 0) {
+	while(read(0, &c, 1) > 0) {
 		if (c == 'x')
 			drawing = !drawing;
 		else if (c == 'w')
@@ -52,7 +52,7 @@ void parse_input(t_env *e) {
 			x--;
 		else if (c == 'd')
 			x++;
-		
+
 		if (x < 0)
 			x = 0;
 		if (y < 0)
@@ -61,24 +61,28 @@ void parse_input(t_env *e) {
 			x = e->w - 1;
 		if (y >= e->h)
 			y = e->h - 1;
-
+		
 		if (drawing)
 			e->board[y * e->w + x] = 1;
 	}
 }
 
 int main(int argc, char **argv) {
+	t_env e;
+	int w;
+	int h;
+	int iter;
+
 	if (argc < 4)
 		return 1;
 
-	int w = atoi(argv[1]);
-	int h = atoi(argv[2]);
-	int iter = atoi(argv[3]);
+	w = atoi(argv[1]);
+	h = atoi(argv[2]);
+	iter = atoi(argv[3]);
 
-	if (w <= 0 || h <= 0 || iter < 0)
+	if (w <= 0 || h <= 0 || iter < 0) 
 		return 1;
 
-	t_env e;
 	e.w = w;
 	e.h = h;
 	e.board = calloc(w * h, sizeof(unsigned char));
@@ -92,9 +96,8 @@ int main(int argc, char **argv) {
 
 	parse_input(&e);
 
-	while (iter-- > 0) {
+	while (iter-- > 0)
 		step(&e);
-	}
 
 	for (int y = 0; y < e.h; y++) {
 		for (int x = 0; x < e.w; x++) {

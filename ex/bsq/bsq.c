@@ -5,12 +5,10 @@ void print_error() {
 }
 
 void free_map(t_map *map) {
-	int i;
-
 	if (!map->grid)
 		return;
-
-	i = 0;
+	
+	int i = 0;
 	while (i < map->lines) {
 		if (map->grid[i])
 			free(map->grid[i]);
@@ -21,6 +19,28 @@ void free_map(t_map *map) {
 	map->grid = NULL;
 }
 
+int is_better_same_size(t_square max, int size, int y, int x) {
+	int new_top;
+	int new_left;
+	int old_top;
+	int old_left;
+
+	if (size != max.size)
+		return 0;
+
+	new_top = y - size + 1;
+	new_left = x - size + 1;
+	old_top = max.y - max.size + 1;
+	old_left = max.x - max.size + 1;
+
+	if (new_top < old_top)
+		return 1;
+	else if (new_top == old_top && new_left < old_left)
+		return 1;
+	
+	return 0;
+}
+
 int parse_header(FILE *fp, t_map *map) {
 	char *line;
 	size_t cap;
@@ -29,6 +49,7 @@ int parse_header(FILE *fp, t_map *map) {
 
 	line = NULL;
 	cap = 0;
+
 	len = getline(&line, &cap, fp);
 	if (len <= 0 || line[len - 1] != '\n')
 		return (free(line), 0);
@@ -42,7 +63,7 @@ int parse_header(FILE *fp, t_map *map) {
 
 	i = 0;
 	while (i < len - 3) {
-		if (line[i] < '0' || line[i] > '9')	
+		if (line[i] < '0' || line[i] > '9')
 			return (free(line), 0);
 		map->lines = map->lines * 10 + (line[i] - '0');
 		i++;
@@ -54,32 +75,9 @@ int parse_header(FILE *fp, t_map *map) {
 		return (free(line), 0);
 	if (map->empty == map->obstacle || map->empty == map->full || map->obstacle == map->full)
 		return (free(line), 0);
-	
+
 	free(line);
 	return 1;
-}
-
-int is_better_same_size(t_square max, int size, int y, int x) {
-	int new_top;
-	int new_left;
-	int old_top;
-	int old_left;
-
-	if (size != max.size) {
-		return 0;
-	}
-
-	new_top = y - size + 1;
-	new_left = x - size + 1;
-	old_top = max.y - max.size + 1;
-	old_left = max.x - max.size + 1;
-
-	if (new_top < old_top)
-		return 1;
-	else if (new_top == old_top && new_left < old_left)
-		return 1;
-
-	return 0;
 }
 
 int solve_bsq(t_map *map) {
@@ -101,9 +99,8 @@ int solve_bsq(t_map *map) {
 	while (i < map->lines) {
 		dp[i] = calloc(map->cols, sizeof(int));
 		if (!dp[i]) {
-			while (--i >= 0) {
+			while (--i >= 0)
 				free(dp[i]);
-			}
 			free(dp);
 			return 0;
 		}
@@ -113,10 +110,10 @@ int solve_bsq(t_map *map) {
 	i = 0;
 	while (i < map->lines) {
 		j = 0;
-		while(j < map->cols) {
+		while (j < map->cols) {
 			if (map->grid[i][j] == map->obstacle)
 				dp[i][j] = 0;
-			else if (i == 0 || j == 0)
+			else if (i == 0 || j == 0) 
 				dp[i][j] = 1;
 			else {
 				min = dp[i - 1][j];
@@ -128,9 +125,9 @@ int solve_bsq(t_map *map) {
 			}
 
 			if (dp[i][j] > max.size || is_better_same_size(max, dp[i][j], i, j)) {
-				max.size  = dp[i][j];
-				max.y = i;
+				max.size = dp[i][j];
 				max.x = j;
+				max.y = i;
 			}
 
 			j++;
@@ -144,7 +141,7 @@ int solve_bsq(t_map *map) {
 		while (j <= max.x) {
 			map->grid[i][j] = map->full;
 			j++;
-		}
+		}		
 		i++;
 	}
 
@@ -177,20 +174,21 @@ int process_map(FILE *fp) {
 	if (!parse_header(fp, &map))
 		return (print_error(), 0);
 
-	map.grid = malloc(sizeof(char *) * map.lines);
-	if (!map.grid) {
+	map.grid = malloc(sizeof(char*) * map.lines);
+	if (!map.grid)
 		return (print_error(), 0);
-	}
- 
+	
 	i = 0;
 	while (i < map.lines) {
 		len = getline(&line, &cap, fp);
 		if (len <= 0 || line[len - 1] != '\n')
 			return (free(line), free(map.grid), print_error(), 0);
 		line[--len] = '\0';
+		
 		if (i == 0)
 			map.cols = len;
-		if (len <= 0 || len != map.cols)
+
+		if (len <= 0 || map.cols != len)
 			return (free(line), free(map.grid), print_error(), 0);
 
 		map.grid[i] = malloc(len + 1);
@@ -235,14 +233,14 @@ int main(int argc, char **argv) {
 	i = 1;
 	while (i < argc) {
 		fp = fopen(argv[i], "r");
-		if (!fp)
+		if (!fp) 
 			print_error();
 		else {
 			process_map(fp);
 			fclose(fp);
 		}
 		i++;
-	}
+	} 
 
 	return 0;
 }
