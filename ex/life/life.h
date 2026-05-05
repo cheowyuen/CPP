@@ -1,9 +1,9 @@
 #ifndef LIFE_H
 #define LIFE_H
 
-#include <stdlib.h>
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 typedef struct s_env {
 	int w;
