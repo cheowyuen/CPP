@@ -1,6 +1,7 @@
 #include "RPN.hpp"
 #include <sstream>
 #include <iostream>
+#include <climits>
 
 int RPN::calculate(const std::string& input) {
 	std::stringstream ss(input);
@@ -9,16 +10,16 @@ int RPN::calculate(const std::string& input) {
 		if (token.size() == 1 && isdigit(token[0])) 
 			_stack.push(token[0] - '0');
 		else if (_stack.size() >= 2 && (token == "+" || token == "-" || token == "*" || token == "/")) {
-			int b = _stack.top();
+			long b = _stack.top();
 			_stack.pop();
-			int a = _stack.top();
+			long a = _stack.top();
 			_stack.pop();
-			int result = 0;
+			long result = 0;
 			if (token == "+")
 				result = a + b;
-			else if (token == "-")
+			else if (token == "-") 
 				result = a - b;
-			else if (token == "*")
+			else if (token == "*") 
 				result = a * b;
 			else if (token == "/") {
 				if (b == 0) {
@@ -27,6 +28,12 @@ int RPN::calculate(const std::string& input) {
 				}
 				result = a / b;
 			}
+
+			if (result > INT_MAX || result < INT_MIN) {
+                std::cerr << "Error\n";
+                return -1;
+            }
+
 			_stack.push(result);
 		}
 		else {

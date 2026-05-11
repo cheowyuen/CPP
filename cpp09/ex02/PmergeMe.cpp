@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 #include <iostream>
 #include <set>
+#include <chrono>
 
 int PmergeMe::parseInput(char **argv) {
 	int i = 1;
@@ -29,20 +30,29 @@ int PmergeMe::parseInput(char **argv) {
 	return 0;
 }
 
-void PmergeMe::sortVector() {
+void PmergeMe::sort(int numCount) {
+	size_t n = _vec.size();
 	std::cout << "Before:";
-	for (size_t i = 0; i < _vec.size(); i++)
+	for (size_t i = 0; i < n; i++)
 		std::cout << " " << _vec[i];
 	std::cout << "\n";
-	_vec = pairAndSort(_vec);
-	std::cout << "After:";
-	for (size_t i = 0; i < _vec.size(); i++)
-		std::cout << " " << _vec[i];
-	std::cout << "\n";
-	return;
-}
 
-void PmergeMe::sortDeque() {
-	pairAndSort(_deq);
-	return;
+	auto start = std::chrono::steady_clock::now();
+	_vec = pairAndSort(_vec);
+	auto end = std::chrono::steady_clock::now();
+	auto duration = std::chrono::duration<double, std::micro>(end - start).count();
+
+	auto startD = std::chrono::steady_clock::now();
+	_deq = pairAndSort(_deq);
+	auto endD = std::chrono::steady_clock::now();
+	auto durationD = std::chrono::duration<double, std::micro>(endD - startD).count();
+
+	std::cout << "After:";
+	for (size_t i = 0; i < n; i++)
+		std::cout << " " << _vec[i];
+	std::cout << "\n";
+
+	std::cout << "Time to process a range of " << numCount << " elements with std::vector : " << duration << " us\n";
+	std::cout << "Time to process a range of " << numCount << " elements with std::deque : " << durationD << " us\n";
+	std::cout << "Comparison count: " << _comparisonCount << "\n";
 }
