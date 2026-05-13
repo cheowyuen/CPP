@@ -43,21 +43,21 @@ class PmergeMe {
 			if (c.size() < 2)
 				return c;
 			int oddNum = -1;
-			// std::unordered_map<int, int> map;
-			std::vector<std::pair<int, int>> pairs;
+			std::unordered_map<int, int> map;
+			// std::vector<std::pair<int, int>> pairs;
 			Container main;
 			Container pending;
 			for (size_t i = 0; i + 1 < c.size(); i += 2) {
 				_comparisonCount++;
 				if (c[i] < c[i + 1]) {
-					// map[c[i]] = c[i + 1];
-					pairs.push_back(std::make_pair(c[i], c[i + 1]));
+					map[c[i + 1]] = c[i];
+					// pairs.push_back(std::make_pair(c[i], c[i + 1]));
 					main.push_back(c[i + 1]);
 					// pending.push_back(c[i]);
 				}
 				else {
-					// map[c[i + 1]] = c[i];
-					pairs.push_back(std::make_pair(c[i + 1], c[i]));
+					map[c[i]] = c[i + 1];
+					// pairs.push_back(std::make_pair(c[i + 1], c[i]));
 					main.push_back(c[i]);
 					// pending.push_back(c[i + 1]);
 				}
@@ -65,7 +65,7 @@ class PmergeMe {
 			if (c.size() % 2 != 0)
 				oddNum = c.back();
 			Container sorted = pairAndSort(main);
-			Container sortedOri = sorted;
+			// Container sortedOri = sorted;
 			// Container sortedP;
 			//previous method
 			// for (size_t i = 0; i < sorted.size(); i++) {
@@ -84,15 +84,18 @@ class PmergeMe {
 			// 	}
 			// }
 
+			for (size_t i = 0; i < sorted.size(); ++i)
+				pending.push_back(map[sorted[i]]);
+
 			//new method
-			for (size_t i = 0; i < sorted.size(); ++i) {
-				for (size_t j = 0; j < pairs.size(); ++j) {
-					if (pairs[j].second == sorted[i]) {
-						pending.push_back(pairs[j].first);
-						break;
-					}
-				}
-			}
+			// for (size_t i = 0; i < sorted.size(); ++i) {
+			// 	for (size_t j = 0; j < pairs.size(); ++j) {
+			// 		if (pairs[j].second == sorted[i]) {
+			// 			pending.push_back(pairs[j].first);
+			// 			break;
+			// 		}
+			// 	}
+			// }
 			sorted.insert(sorted.begin(), pending[0]);
 
 			size_t prev = 0;
@@ -105,14 +108,16 @@ class PmergeMe {
 			while (index < main.size()) {
 				size_t i = index;
 				while (i > prev) {
-					auto it = std::find(sorted.begin(), sorted.end(), sortedOri[i]);
-					// size_t left = binary_insert(sorted, it - sorted.begin(), sortedP[i]);
-					size_t left = binary_insert(sorted, it - sorted.begin(), pending[i]);
-					sorted.insert(sorted.begin() + left, pending[i]);
+					auto it = std::upper_bound(sorted.begin(), sorted.end(), pending[i]);
+					sorted.insert(it, pending[i]);
+					// auto it = std::find(sorted.begin(), sorted.end(), sortedOri[i]);
+					// // size_t left = binary_insert(sorted, it - sorted.begin(), sortedP[i]);
+					// size_t left = binary_insert(sorted, it - sorted.begin(), pending[i]);
+					// sorted.insert(sorted.begin() + left, pending[i]);
 					i--;
 				}
 				size_t temp = index;
-				index = (index + 1) + (prev + 1) * 2;
+				index = ((index + 1) + (prev + 1) * 2) - 1;
 				if (main.size() <= index &&  !last) {
 					index = main.size() - 1;
 					last = true;
@@ -120,11 +125,46 @@ class PmergeMe {
 				prev = temp;
 			}
 
-			// for (size_t i = 1; i < pending.size(); ++i) {
-			// 	// Optimization: When inserting pending[i], we know it is smaller than sorted[pos of its pair]
-			// 	// But for a simple fix, searching the whole current 'sorted' works fine.
-			// 	size_t pos = binary_insert(sorted, sorted.size(), pending[i]);
-			// 	sorted.insert(sorted.begin() + pos, pending[i]);
+
+			// size_t insertions = 1; 
+
+			// size_t prev = 0;
+			// size_t index = 2;
+			// bool last = false;
+
+			// if (pending.size() <= index) {
+			// 	index = pending.size() - 1;
+			// 	last = true;
+			// }
+			
+			// while (prev < pending.size()) {
+			// 	size_t i = index;
+				
+			// 	while (i > prev) {
+			// 		size_t limit = i + insertions;
+
+			// 		if (limit > sorted.size()) {
+			// 			limit = sorted.size();
+			// 		}
+
+			// 		size_t left = binary_insert(sorted, limit, pending[i]);
+					
+			// 		sorted.insert(sorted.begin() + left, pending[i]);
+					
+			// 		insertions++;
+			// 		i--;
+			// 	}
+
+			// 	size_t temp = index;
+			// 	index = ((index + 1) + (prev + 1) * 2) - 1;
+				
+			// 	if (pending.size() <= index && !last) {
+			// 		index = pending.size() - 1;
+			// 		last = true;
+			// 	}
+			// 	prev = temp;
+				
+			// 	if (prev >= pending.size() - 1) break;
 			// }
 
 			if (oddNum != -1) {
